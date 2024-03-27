@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang=en>
+
+<head>
+    <meta charset=utf-8>
+    <meta name=viewport content='width=device-width, initial-scale=1'>
+    <meta name=color-scheme content='dark light' />
+    <title>Checkswipe.js</title>
+
+    <!-- nice styling for page (but it works without it! try deleting this css link to see what it looks like :) -->
+    <link rel=stylesheet href=pico.classless.min.css>
+
+    <!-- only things related to checkswipe -->
+    <script src=checkswipe.js defer></script>
+    <link href=checkswipe.css rel=stylesheet>
+
+    <!-- — styling for this page — -->
+    <!-- general styling -->
+    <style>
+      :root {
+        font-family: system-ui;
+      }
+
+      body > :is(main, header, footer) {
+        max-width: 60ch;
+      }
+
+      label {
+        display: block;
+      }
+
+      input[type=checkbox] + label {
+        display: inline-block;
+      }
+
+      header {
+        display: flex;
+      }
+
+      header h1 {
+        margin-block-start: 0;
+      }
+
+      header .slogan {
+        margin: 0;
+      }
+
+      .playfield {
+        display: inline-block;
+      }
+
+      .playfield > div {
+        display: flex;
+        gap: 2em;
+      }
+
+      .game {
+        width: 200px;
+      }
+
+      [data-timer] {
+        font-family: monospace;
+      }
+
+      [data-timer]::before {
+        content: 'Timer: ';
+      }
+
+      [data-timer][data-best-display]::after {
+        content: 'Best: ' attr(data-best-display);
+        display: block;
+      }
+
+      /* nesting css because it's non-essential (won't work with old browser) */
+      code {
+        & .kw {
+          color: #f6547e;
+        }
+
+        & .attr,
+        & .fn {
+          color: #c79400;
+        }
+
+        & .v {
+          color: #00a66e;
+        }
+
+        & .comment {
+          color: #767676;
+        }
+      }
+    </style>
+    <!-- logo animation -->
+    <style>
+      #logo-demo {
+        position: relative;
+        display: grid;
+        gap: 0.6em;
+        padding-top: 0.55em;
+        padding-bottom: 0.28em;
+        box-sizing: border-box;
+        margin-right: 1.7em;
+        --demo-dur: 4s;
+      }
+
+      #logo-demo > .cb {
+        position: relative;
+        aspect-ratio: 1 / 1;
+        height: 100%;
+        background: white;
+        border-radius: 25%;
+        overflow: hidden;
+
+        animation: checkbox-scale var(--demo-dur) ease-in-out 0.5s infinite;
+      }
+
+      #logo-demo > .cb::after {
+        content: '';
+        position: absolute;
+        border: 1px solid #767676;
+        border-radius: inherit;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        animation: checkbox-visibility calc(2 * var(--demo-dur)) ease-in-out var(--delay, 0s) infinite;
+      }
+
+      #logo-demo > .cr {
+        color: white;
+        position: absolute;
+        top: 17%;
+        left: 0.3em;
+
+        animation: cursor var(--demo-dur) ease-in-out 0s infinite;
+      }
+
+      /* animation of a cursor going up and down */
+      @keyframes cursor {
+        0% {
+          top: 17%;
+        }
+
+        15% {
+          transform: translateY(0);
+        }
+        15.001% {
+          transform: translateY(2px);
+        }
+
+        40% {
+          top: 17%;
+        }
+
+        50% {
+          top: 110%;
+        }
+
+        55% {
+          transform: translateY(2px);
+        }
+        55.001% {
+          transform: translateY(0);
+        }
+
+        80% {
+          top: 110%;
+        }
+
+        100% {
+          top: 17%;
+        }
+      }
+
+      @keyframes checkbox-scale {
+        0%, 10% {
+          transform: scale(1);
+        }
+        14%, 50% {
+          transform: scale(1.3);
+        }
+        54%, 100% {
+          transform: scale(1);
+        }
+      }
+
+      @keyframes checkbox-visibility {
+        0%, 49.999% {
+          background: dodgerblue;
+          border: none;
+        }
+
+        50%, 100% {
+          background: none;
+          border: 1px solid #767676;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #logo-demo :is(.cb, .cr, .cr::after) {
+          animation: none;
+        }
+
+        #logo-demo > .cb {
+          border: none;
+        }
+
+        #logo-demo > .cb::after {
+          border: none;
+          background: dodgerblue;
+        }
+
+        #logo-demo > .cr {
+          display: none;
+        }
+      }
+    </style>
+    <!-- local / cdn selector styling -->
+    <style>
+      input#use-cdn + label {
+        margin-block-end: 0.8em;
+      }
+
+      input#use-cdn:checked ~ .local {
+        display: none;
+      }
+
+      input#use-cdn:checked ~ .cdn {
+        display: block;
+      }
+
+      .cdn {
+        display: none;
+      }
+    </style>
+</head>
+
+<body>
+<header>
+    <aside id=logo-demo aria-hidden=true>
+        <div class=cb style='--delay: 0.6s;'></div>
+        <div class=cb style='--delay: 1.75s;'></div>
+        <div class=cb style='--delay: 1.85s;'></div>
+        <svg class=cr width=12 height=18 viewBox='-1 -1 13 19' xmlns='http://www.w3.org/2000/svg'>
+            <path d='M0,0 L0,16 L4,13 L7,18 L9,16 L7,12 L12,12 Z' fill=white stroke=black stroke-width=1 />
+        </svg>
+    </aside>
+    <div>
+        <h1>Checkswipe.js</h1>
+        <p class=slogan><i>Non-intrusive <abbr title='quality of life'>QoL</abbr> for speedy checkboxes</i></p>
+    </div>
+</header>
+<main>
+    <h2>Try it</h2>
+    <p>"Click-n-Drag" over multiple checkboxes to fastly toggle them.</p>
+
+    <form>
+        <fieldset data-checkswipe>
+            <label><input type=checkbox name=one> Option 1</label>
+            <label><input type=checkbox name=two> Option 2</label>
+            <label><input type=checkbox name=three> Option 3</label>
+            <label><input type=checkbox name=four> Option 4</label>
+            <label><input type=checkbox name=five> Option 5</label>
+        </fieldset>
+        <small>Tip: right-click and select "Inspect element" to see what the markup looks like!</small>
+    </form>
+
+    <h2>Get it</h2>
+    <input id=use-cdn type=checkbox role=switch />
+    <label for=use-cdn>Use CDN</label>
+
+    <pre class=local><code>&lt;<span class=kw>script</span> <span class=attr>src</span>=<span class=v>/js/<a href=https://github.com/vladdeSV/checkswipe-js/releases>checkswipe.js</a></span> <span class=attr>defer</span>&gt;&lt;/<span class=kw>script</span>&gt;<br>&lt;<span class=kw>link</span> <span class=attr>href</span>=<span class=v>/css/<a href=https://github.com/vladdeSV/checkswipe-js/releases>checkswipe.css</a></span> <span class=attr>rel</span>=<span class=v>stylesheet</span>&gt; <span class=comment>&lt;!-- optional --&gt;</span></code></pre>
+    <pre class=cdn><code>&lt;<span class=kw>script</span> <span class=attr>src</span>=<span class=v>https://cdn.jsdelivr.net/npm/@vladdesv/checkswipe-js@1/js/checkswipe.min.js</span> <span class=attr>defer</span>&gt;&lt;/<span class=kw>script</span>&gt;<br>&lt;<span class=kw>link</span> <span class=attr>href</span>=<span class=v>https://cdn.jsdelivr.net/npm/@vladdesv/checkswipe-js@1/js/checkswipe.min.css</span> <span class=attr>rel</span>=<span class=v>stylesheet</span>&gt; <span class=comment>&lt;!-- optional --&gt;</span></code></pre>
+    <pre><code>&lt;<span class=kw>fieldset</span> <mark><span class=attr>data-checkswipe</span></mark>&gt;<br>  &lt;<span class=kw>input</span> <span class=attr>type</span>=<span class=v>checkbox</span>&gt;<br>  &lt;<span class=kw>input</span> <span class=attr>type</span>=<span class=v>checkbox</span>&gt;<br>&lt;/<span class=kw>fieldset</span>&gt;</code></pre>
+
+    <p>To enable Checkswipe.js on page load, add the attribute <code><span class=attr>data-checkswipe</span></code> to any element – preferably <code>&lt;<span class=kw>fieldset</span>&gt;</code>.</p>
+
+    <h2>Is it really faster?</h2>
+    <p>Try it out for your self – see how fast you can toggle all checkboxes.</p>
+    <p>Timer starts on the <code>mousedown</code> event; stops when all checkboxes are checked.</p>
+
+    <section class=playfield>
+        <label>
+            Difficulty
+            <input type=range min=2 max=20 value=5 id=difficulty>
+        </label>
+
+        <div>
+            <div>
+                <h3>Checkswipe.js</h3>
+                <form class=game>
+                    <fieldset data-checkswipe>
+                        <label><input type=checkbox name=1> Option 1</label>
+                        <label><input type=checkbox name=2> Option 2</label>
+                        <label><input type=checkbox name=3> Option 3</label>
+                        <label><input type=checkbox name=4> Option 4</label>
+                        <label><input type=checkbox name=5> Option 5</label>
+                    </fieldset>
+                    <p><span data-timer data-best-display=–>–</span></p>
+                    <div class=reset>
+                        <button type=reset>reset</button>
+                    </div>
+                </form>
+            </div>
+
+            <div>
+                <h3>Vanilla</h3>
+                <form class=game>
+                    <fieldset>
+                        <label><input type=checkbox name=1> Option 1</label>
+                        <label><input type=checkbox name=2> Option 2</label>
+                        <label><input type=checkbox name=3> Option 3</label>
+                        <label><input type=checkbox name=4> Option 4</label>
+                        <label><input type=checkbox name=5> Option 5</label>
+                    </fieldset>
+                    <p><span data-timer data-best-display=–>–</span></p>
+                    <div class=reset>
+                        <button type=reset>reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <h2>Love it?</h2>
+    <p>If this little project made you smile, send me a virtual coffee – it boosts my ego.</p>
+    <p>
+        <a href=https://www.buymeacoffee.com/vladde><img src=https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png alt='Buy Me A Coffee' width=217 height=60></a>
+        <!-- this loads in google fonts, which i don't like (privacy reasons) <script type=text/javascript data-integrity=sha256-34b50941eef94ced5cacf2234be9bdfba74d556e35394a63acd987735f6c1c6b src=https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js data-name=bmc-button data-slug=vladde data-color=#FFDD00 data-emoji='' data-font=Cookie data-text='Buy me a coffee' data-outline-color=#000000 data-font-color=#000000 data-coffee-color=#ffffff></script> -->
+    </p>
+
+    <h2>How it works</h2>
+    <p>Looks for every <code>&lt;<span class=kw><i>element</i></span>&gt;</code> with the attribute <code><span class=attr>data-checkswipe</span></code>, and attaches a listener to each checkbox inside. Each <code>&lt;<span class=kw><i>element</i></span>&gt;</code> is independent, and only checkboxes within them can be swiped.</p>
+    <p>Intentionally only activates when pressing and dragging over checkboxes – does not affect labels and their text.</p>
+    <p>Checkboxes growing larger is pure and simple <abbr title='cascading style sheets'>CSS</abbr>, and is not required.</p>
+    <p>Caveat: Each <code>&lt;<span class=kw>input</span> <span class=attr>type</span>=<span class=v>checkbox</span>&gt;</code> gets event listeners – adding or replacing the elements requires to re-run code.</p>
+
+    <h2>Advanced</h2>
+    <p>Checkswipe can be manually applied to any element, or specific checkboxes:</p>
+    <pre><code><span class=fn>checkswipeAttachGroup</span>(group) <span class=comment>// eg. checkswipeAttachGroup(myCheckboxDiv)</span><br><span class=fn>checkswipeAttachSingle</span>(checkbox, parentGroup) <span class=comment>// eg. checkswipeAttach(checkbox, myCheckboxDiv)</span></code></pre>
+</main>
+
+<script>
+    /*
+        now, let me be very clear: this code below is just some super hacky code to make the game work
+        it's not pretty, but it works.
+        "if it looks stupid but works, it ain't stupid"
+        please pretend this code doesn't exist, and focus on the checkswipe.js part :)
+     */
+    const range = document.getElementById('difficulty')
+    let intervals = Array(2)
+
+    function resetGame() {
+        clearInterval(intervals[0])
+        clearInterval(intervals[1])
+        const games = document.querySelectorAll('form.game')
+
+        function repopulateFieldset(fieldset, count) {
+            fieldset.innerHTML = ''
+            for (let i = 1; i <= count; i++) {
+                fieldset.innerHTML += `<label><input type=checkbox name=${i}> Option ${i}</label>`
+            }
+        }
+
+        games.forEach(form => {
+            const fieldset = form.querySelector('fieldset')
+            repopulateFieldset(fieldset, range.value)
+
+            const timerDisplay = form.querySelector('[data-timer]')
+            const checkboxes = form.querySelectorAll('input[type=checkbox]')
+            const resetContainer = form.querySelector('div.reset')
+
+            let timerStarted = false;
+            let timer = 0;
+
+            timerDisplay.dataset.best = '';
+            timerDisplay.dataset.bestDisplay = '–';
+            timerDisplay.textContent = '–';
+
+            resetContainer.innerHTML = '<button type=reset>reset</button>'
+            const reset = resetContainer.querySelector('button[type=reset]')
+            reset.addEventListener('click', () => {
+                clearInterval(intervals[form.dataset.checkswipe !== undefined ? 0 : 1]);
+                timerStarted = false;
+                timer = 0;
+                timerDisplay.textContent = '–';
+                checkboxes.forEach(checkbox => checkbox.checked = false);
+            });
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('mousedown', () => {
+                    if (!timerStarted) {
+                        startTimer();
+                        timerStarted = true;
+                    }
+                });
+
+                checkbox.addEventListener('change', checkCompletion);
+            });
+
+            function startTimer() {
+                intervals[form.dataset.checkswipe !== undefined ? 0 : 1] = setInterval(() => {
+                    timer++;
+                    let displayNumber = timer / 100
+                    timerDisplay.textContent = displayNumber.toFixed(2) + 's';
+                }, 10);
+            }
+
+            function checkCompletion() {
+                const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+                if (allChecked) {
+                    clearInterval(intervals[form.dataset.checkswipe !== undefined ? 0 : 1]);
+                    let best = timerDisplay.dataset.best;
+                    if (best === undefined || best === '' || timer < best) {
+                        timerDisplay.dataset.best = String(timer);
+                        timerDisplay.dataset.bestDisplay = (timer / 100).toFixed(2) + 's';
+                    }
+                }
+            }
+
+            if (fieldset.hasAttribute('data-checkswipe')) {
+                checkswipeAttachGroup(fieldset)
+            }
+        })
+    }
+
+    range.addEventListener('input', resetGame)
+    document.addEventListener('DOMContentLoaded', resetGame)
+</script>
+</body>
+
+</html>
