@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "es7"
+    ],
+    "allowJs": false,
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+    /* Linting */
+    "strict": true,
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true
+  }
+}
