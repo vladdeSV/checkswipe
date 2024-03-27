@@ -1,8 +1,15 @@
-fieldset[data-checkswipe] input[type=checkbox] {
-    transition: transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    transition-delay: 0.1s;
+:root {
+  /* checkswipe defaults */
+  --checkswipe-scale: 1.3;
+  --checkswipe-delay: 0.1s;
+  --checkswipe-duration: 0.1s;
+  --checkswipe-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-fieldset[data-checkswipe=enlarged] input[type=checkbox] {
-    transform: scale(1.5);
+[data-checkswipe] input[type=checkbox] {
+  transition: transform var(--checkswipe-duration) var(--checkswipe-easing) var(--checkswipe-delay);
+}
+
+[data-checkswipe=enlarged] input[type=checkbox] {
+  transform: scale(var(--checkswipe-scale));
 }
