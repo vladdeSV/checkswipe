@@ -3,8 +3,6 @@
     <foreignObject class="foreign" width="128" height="128">
         <div xmlns="http://www.w3.org/1999/xhtml">
             <style>
-                /*(calc(-1 * var(--checkbox-size))) scale(1.25);*/
-
 @keyframes scroll {
     from {
         display: none; /* favicon hack */
