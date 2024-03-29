@@ -1,0 +1,198 @@
+:root {
+  font-family: system-ui;
+}
+
+body > :is(main, header, footer) {
+  max-width: 60ch;
+}
+
+label {
+  display: block;
+}
+
+input[type=checkbox] + label {
+  display: inline-block;
+}
+
+header {
+  display: flex;
+}
+
+header h1 {
+  margin-block-start: 0;
+}
+
+header .slogan {
+  margin: 0;
+}
+
+.playfield {
+  display: inline-block;
+}
+
+.playfield > div {
+  display: flex;
+  gap: 2em;
+}
+
+.game {
+  width: 200px;
+}
+
+[data-timer] {
+  font-family: monospace;
+}
+
+[data-timer]::before {
+  content: 'Timer: ';
+}
+
+[data-timer][data-best-display]::after {
+  content: 'Best: ' attr(data-best-display);
+  display: block;
+}
+
+/* nesting css because it's non-essential (won't work with old browser) */
+code {
+  & .kw {
+    color: #f6547e;
+  }
+
+  & .attr,
+  & .fn {
+    color: #c79400;
+  }
+
+  & .v {
+    color: #00a66e;
+  }
+
+  & .comment {
+    color: #767676;
+  }
+}
+
+/* logo animation */
+#logo-demo {
+  position: relative;
+  display: grid;
+  gap: 0.6em;
+  padding-top: 0.55em;
+  padding-bottom: 0.28em;
+  box-sizing: border-box;
+  margin-right: 1.7em;
+  --demo-dur: 4s;
+}
+
+#logo-demo > .cb {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  height: 100%;
+  background: white;
+  border-radius: 25%;
+  overflow: hidden;
+
+  animation: checkbox-scale var(--demo-dur) ease-in-out 0.5s infinite;
+}
+
+#logo-demo > .cb::after {
+  content: '';
+  position: absolute;
+  border: 1px solid #767676;
+  border-radius: inherit;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  animation: checkbox-visibility calc(2 * var(--demo-dur)) ease-in-out var(--delay, 0s) infinite;
+}
+
+#logo-demo > .cr {
+  color: white;
+  position: absolute;
+  top: 17%;
+  left: 0.3em;
+
+  animation: cursor var(--demo-dur) ease-in-out 0s infinite;
+}
+
+/* animation of a cursor going up and down */
+@keyframes cursor {
+  0% {
+    top: 17%;
+  }
+
+  15% {
+    transform: translateY(0);
+  }
+  15.001% {
+    transform: translateY(2px);
+  }
+
+  40% {
+    top: 17%;
+  }
+
+  50% {
+    top: 110%;
+  }
+
+  55% {
+    transform: translateY(2px);
+  }
+  55.001% {
+    transform: translateY(0);
+  }
+
+  80% {
+    top: 110%;
+  }
+
+  100% {
+    top: 17%;
+  }
+}
+
+@keyframes checkbox-scale {
+  0%, 10% {
+    transform: scale(1);
+  }
+  14%, 50% {
+    transform: scale(1.3);
+  }
+  54%, 100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes checkbox-visibility {
+  0%, 49.999% {
+    background: dodgerblue;
+    border: none;
+  }
+
+  50%, 100% {
+    background: none;
+    border: 1px solid #767676;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #logo-demo :is(.cb, .cr, .cr::after) {
+    animation: none;
+  }
+
+  #logo-demo > .cb {
+    border: none;
+  }
+
+  #logo-demo > .cb::after {
+    border: none;
+    background: dodgerblue;
+  }
+
+  #logo-demo > .cr {
+    display: none;
+  }
+}
