@@ -1,1 +1,95 @@
-<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd"><path d="M128 25.6v76.8c0 14.129-11.471 25.6-25.6 25.6H25.6C11.471 128 0 116.529 0 102.4V25.6C0 11.471 11.471 0 25.6 0h76.8C116.529 0 128 11.471 128 25.6Z" style="fill:#1e90ff" transform="translate(14 14) scale(.78125)"/><path d="M1.05.9v14.4l3.6-2.7 2.7 4.5 1.8-1.8-1.8-3.6h4.5L1.05.9Z" style="fill:#fff;fill-rule:nonzero;stroke:#000;stroke-width:.9px" transform="matrix(4.97132 0 0 4.97132 58.78 39.258)"/></svg>
+<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd">
+    <path class="fallback-checkbox" d="M128 25.6v76.8c0 14.129-11.471 25.6-25.6 25.6H25.6C11.471 128 0 116.529 0 102.4V25.6C0 11.471 11.471 0 25.6 0h76.8C116.529 0 128 11.471 128 25.6Z" style="fill:#1e90ff" transform="translate(14 14) scale(.78125)"/>
+    <foreignObject class="foreign" width="128" height="128">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+            <style>
+                /*(calc(-1 * var(--checkbox-size))) scale(1.25);*/
+
+@keyframes scroll {
+    from {
+        display: none; /* favicon hack */
+        margin-top: var(--offset);
+    }
+    to {
+        display: flex; /* favicon hack */
+        margin-top: calc(var(--offset) - var(--checkbox-size) - var(--gap) - var(--border-size));
+    }
+}
+
+/*
+    on my browser, favicons are not animated, only %0 is shown
+    i get better results when i use opacity, compared to using display: block;
+*/
+@keyframes hide-in-favicon {
+    0% { opacity: 0; }
+    0.0001% { opacity: 1; }
+    100% { opacity: 1; }
+}
+
+@keyframes show-in-favicon {
+    0% { opacity: 1; }
+    0.0001% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+.foreign {
+    animation: hide-in-favicon 1s infinite;
+}
+
+.fallback-checkbox {
+    opacity: 0;
+    animation: show-in-favicon 1s infinite;
+}
+
+.wrapper {
+    --offset: -30px;
+    --gap: 20px;
+    --checkbox-size: 60px;
+    --animation-duration: 0.4s;
+    --border-size: 8px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap);
+
+    animation: scroll var(--animation-duration) infinite linear;
+}
+
+.checkbox {
+    width: calc(var(--checkbox-size) - var(--border-size));
+    height: calc(var(--checkbox-size) - var(--border-size));
+    border: var(--border-size) solid dodgerblue;
+    background: dodgerblue;
+    border-radius: 20%;
+}
+
+.checkbox.unselected {
+    background: white;
+    border: var(--border-size) solid #767676;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .wrapper {
+        animation: none;
+    }
+
+    .foreign {
+        display: none;
+    }
+
+    .fallback-checkbox {
+        opacity: 1;
+        animation: none;
+    }
+}
+            </style>
+            <div class="wrapper">
+                <div class="checkbox"/>
+                <div class="checkbox"/>
+                <div class="checkbox unselected"/>
+            </div>
+        </div>
+    </foreignObject>
+    <path d="M1.05.9v14.4l3.6-2.7 2.7 4.5 1.8-1.8-1.8-3.6h4.5L1.05.9Z" style="fill:#fff;fill-rule:nonzero;stroke:#000;stroke-width:.9px" transform="matrix(4.97132 0 0 4.97132 58.78 39.258)"/>
+</svg>
