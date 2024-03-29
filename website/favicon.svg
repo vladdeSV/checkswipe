@@ -7,22 +7,27 @@
 
 @keyframes scroll {
     from {
-        display: none;
+        display: none; /* favicon hack */
         margin-top: var(--offset);
     }
     to {
-        display: flex;
+        display: flex; /* favicon hack */
         margin-top: calc(var(--offset) - var(--checkbox-size) - var(--gap) - var(--border-size));
     }
 }
 
+/*
+    on my browser, favicons are not animated, only %0 is shown
+    i get better results when i use opacity, compared to using display: block;
+*/
 @keyframes hack {
-    0% { display: block; }
-    0.00001% { display: none; }
-    100% { display: none; }
+    0% { opacity: 1; }
+    0.0001% { opacity: 0; }
+    100% { opacity: 0; }
 }
 
 .hm {
+    opacity: 0;
     animation: hack 1s infinite;
 }
 
