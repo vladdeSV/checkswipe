@@ -1,6 +1,6 @@
 <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd">
-    <path class="hm" d="M128 25.6v76.8c0 14.129-11.471 25.6-25.6 25.6H25.6C11.471 128 0 116.529 0 102.4V25.6C0 11.471 11.471 0 25.6 0h76.8C116.529 0 128 11.471 128 25.6Z" style="fill:#1e90ff" transform="translate(14 14) scale(.78125)"/>
-    <foreignObject width="128" height="128">
+    <path class="fallback-checkbox" d="M128 25.6v76.8c0 14.129-11.471 25.6-25.6 25.6H25.6C11.471 128 0 116.529 0 102.4V25.6C0 11.471 11.471 0 25.6 0h76.8C116.529 0 128 11.471 128 25.6Z" style="fill:#1e90ff" transform="translate(14 14) scale(.78125)"/>
+    <foreignObject class="foreign" width="128" height="128">
         <div xmlns="http://www.w3.org/1999/xhtml">
             <style>
                 /*(calc(-1 * var(--checkbox-size))) scale(1.25);*/
@@ -20,15 +20,25 @@
     on my browser, favicons are not animated, only %0 is shown
     i get better results when i use opacity, compared to using display: block;
 */
-@keyframes hack {
+@keyframes hide-in-favicon {
+    0% { opacity: 0; }
+    0.0001% { opacity: 1; }
+    100% { opacity: 1; }
+}
+
+@keyframes show-in-favicon {
     0% { opacity: 1; }
     0.0001% { opacity: 0; }
     100% { opacity: 0; }
 }
 
-.hm {
+.foreign {
+    animation: hide-in-favicon 1s infinite;
+}
+
+.fallback-checkbox {
     opacity: 0;
-    animation: hack 1s infinite;
+    animation: show-in-favicon 1s infinite;
 }
 
 .wrapper {
@@ -64,19 +74,13 @@
         animation: none;
     }
 
-    .checkbox {
+    .foreign {
         display: none;
     }
 
-    .checkbox:first-child {
-        display: block;
-        position: absolute;
-        width: unset;
-        height: unset;
-        top: 14px;
-        bottom: 14px;
-        left: 14px;
-        right: 14px;
+    .fallback-checkbox {
+        opacity: 1;
+        animation: none;
     }
 }
             </style>
