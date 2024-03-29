@@ -1,14 +1,29 @@
 <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd">
+    <path class="hm" d="M128 25.6v76.8c0 14.129-11.471 25.6-25.6 25.6H25.6C11.471 128 0 116.529 0 102.4V25.6C0 11.471 11.471 0 25.6 0h76.8C116.529 0 128 11.471 128 25.6Z" style="fill:#1e90ff" transform="translate(14 14) scale(.78125)"/>
     <foreignObject width="128" height="128">
         <div xmlns="http://www.w3.org/1999/xhtml">
             <style>
+                /*(calc(-1 * var(--checkbox-size))) scale(1.25);*/
+
 @keyframes scroll {
-    0% {
-        transform: translateY(var(--offset));
+    from {
+        display: none;
+        margin-top: var(--offset);
     }
-    100% {
-        transform: translateY(calc(var(--offset) - var(--checkbox-size) - var(--gap) - var(--border-size)));
+    to {
+        display: flex;
+        margin-top: calc(var(--offset) - var(--checkbox-size) - var(--gap) - var(--border-size));
     }
+}
+
+@keyframes hack {
+    0% { display: block; }
+    0.00001% { display: none; }
+    100% { display: none; }
+}
+
+.hm {
+    animation: hack 1s infinite;
 }
 
 .wrapper {
