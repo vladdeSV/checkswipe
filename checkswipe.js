@@ -1,8 +1,8 @@
-let checkswipeCurrentFieldset: HTMLElement | undefined = undefined
-let checkswipeGlobalCheckboxState: boolean | undefined = undefined
+let checkswipeCurrentFieldset = undefined
+let checkswipeGlobalCheckboxState = undefined
 
-function checkswipeAttachSingle(checkbox: HTMLInputElement, parent: HTMLElement) {
-    checkbox.addEventListener('click', (event: Event) => {
+function checkswipeAttachSingle(checkbox, parent) {
+    checkbox.addEventListener('click', (event) => {
         // prevent default when clicking directly on the checkbox (not when clicking on labels)
         if (event instanceof MouseEvent && event.detail > 0) {
             event.preventDefault()
@@ -26,8 +26,8 @@ function checkswipeAttachSingle(checkbox: HTMLInputElement, parent: HTMLElement)
     })
 }
 
-function checkswipeAttachGroup(group: HTMLElement) {
-    const checkboxes: NodeListOf<HTMLInputElement> = group.querySelectorAll('input[type=checkbox]')
+function checkswipeAttachGroup(group) {
+    const checkboxes = group.querySelectorAll('input[type=checkbox]')
 
     if (!group.dataset.checkswipe) {
         group.dataset.checkswipe = ''
@@ -49,7 +49,7 @@ document.addEventListener('mouseup', () => {
 })
 
 // attach listeners on load
-const groups: NodeListOf<HTMLElement> = document.querySelectorAll('[data-checkswipe]')
+const groups = document.querySelectorAll('[data-checkswipe]')
 for (const group of Array.from(groups)) {
     checkswipeAttachGroup(group)
 }
