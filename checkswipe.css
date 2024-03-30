@@ -10,6 +10,12 @@
   transition: transform var(--checkswipe-duration) var(--checkswipe-easing) var(--checkswipe-delay);
 }
 
-[data-checkswipe=enlarged] input[type=checkbox] {
+[data-checkswipe=checked] input[type=checkbox],
+[data-checkswipe=unchecked] input[type=checkbox] {
   transform: scale(var(--checkswipe-scale));
 }
+
+/* todo:
+    how well supported is `:is()`?
+    ah, no IE9 support :(
+*/
