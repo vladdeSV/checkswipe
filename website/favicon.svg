@@ -40,7 +40,7 @@
 }
 
 .wrapper {
-    --offset: -30px;
+    --offset: -40px;
     --gap: 20px;
     --checkbox-size: 60px;
     --animation-duration: 0.4s;
