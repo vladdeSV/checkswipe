@@ -44,6 +44,7 @@ header .slogan {
 
 .game button[type=reset] {
   padding-block: 0.4em;
+  margin-bottom: 0;
 }
 
 [data-timer] {
