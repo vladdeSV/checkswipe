@@ -117,7 +117,7 @@
 
     <h2>Advanced</h2>
     <p>Checkswipe can be manually applied to any element, or specific checkboxes:</p>
-    <pre><code><span class=fn>checkswipeAttachGroup</span>(group) <span class=comment>// eg. checkswipeAttachGroup(myCheckboxDiv)</span><br><span class=fn>checkswipeAttachSingle</span>(checkbox, parentGroup) <span class=comment>// eg. checkswipeAttach(checkbox, myCheckboxDiv)</span></code></pre>
+    <pre><code><span class=fn>checkswipe</span>() <span class=comment>// all <span class=attr>[data-checkswipe]</span> on page</span><br><span class=fn>checkswipe</span>(group) <span class=comment>// eg. checkswipe(myDiv)</span><br><span class=fn>checkswipe</span>(group, checkbox) <span class=comment>// eg. checkswipe(myDiv, checkbox)</span></code></pre>
 </main>
 
 <script>
@@ -199,7 +199,7 @@
             }
 
             if (fieldset.hasAttribute('data-checkswipe')) {
-                checkswipeAttachGroup(fieldset)
+                checkswipe(fieldset)
             }
         })
     }
