@@ -64,9 +64,16 @@
     <pre><code>&lt;<span class=kw>script</span> <span class=attr>src</span>=<span class=v>/js/<a href=https://github.com/vladdeSV/checkswipe/releases/latest>checkswipe.js</a></span> <span class=attr>defer</span> <span class=attr>onload</span>=<span class=fn>checkswipe</span>()&gt;&lt;/<span class=kw>script</span>&gt;<br>&lt;<span class=kw>link</span> <span class=attr>href</span>=<span class=v>/css/<a href=https://github.com/vladdeSV/checkswipe/releases/latest>checkswipe.css</a></span> <span class=attr>rel</span>=<span class=v>stylesheet</span>&gt; <span class=comment>&lt;!-- optional --&gt;</span></code></pre>
     <pre><code>&lt;<span class=kw>fieldset</span> <mark><span class=attr>data-checkswipe</span></mark>&gt;<br>  &lt;<span class=kw>input</span> <span class=attr>type</span>=<span class=v>checkbox</span>&gt;<br>  &lt;<span class=kw>input</span> <span class=attr>type</span>=<span class=v>checkbox</span>&gt;<br>&lt;/<span class=kw>fieldset</span>&gt;</code></pre>
 
-    <p>To enable Checkswipe.js on page load, add the attribute <code><span class=attr>data-checkswipe</span></code> to any element (preferably <code>&lt;<span class=kw>fieldset</span>&gt;</code>) and after page has loaded run <code><span class=fn>checkswipe</span>()</code>.</p>
-    <p>Checkswipe can be manually applied to any element, or specific checkboxes:</p>
-    <pre><code><span class=fn>checkswipe</span>() <span class=comment>// all <span class=attr>[data-checkswipe]</span> on page</span><br><span class=fn>checkswipe</span>(group) <span class=comment>// eg. checkswipe(myDiv)</span><br><span class=fn>checkswipe</span>(group, checkbox) <span class=comment>// eg. checkswipe(myDiv, checkbox)</span></code></pre>
+    <p>To enable Checkswipe.js on page load:</p>
+    <ol>
+        <li>add the attribute <code><span class=attr>data-checkswipe</span></code> to any element (preferably <code>&lt;<span class=kw>fieldset</span>&gt;</code>)</li>
+        <li>after page has loaded, run <code><span class=fn>checkswipe</span>()</code></li>
+    </ol>
+
+    <aside>
+        <p>Checkswipe can be manually applied to any element, or specific checkboxes:</p>
+        <pre><code><span class=fn>checkswipe</span>() <span class=comment>// all <span class=attr>[data-checkswipe]</span> on page</span><br><span class=fn>checkswipe</span>(group) <span class=comment>// eg. checkswipe(myDiv)</span><br><span class=fn>checkswipe</span>(group, checkbox) <span class=comment>// eg. checkswipe(myDiv, checkbox)</span></code></pre>
+    </aside>
 
     <h2>Is it really faster?</h2>
     <p>Try it out for yourself – see how fast you can toggle all checkboxes.</p>
