@@ -2,13 +2,6 @@ let checkswipeCurrentFieldset = undefined
 let checkswipeGlobalCheckboxState = undefined
 
 function checkswipeAttachSingle(checkbox, parent) {
-    checkbox.addEventListener('click', (event) => {
-        // prevent default when clicking directly on the checkbox (not when clicking on labels)
-        if (event instanceof MouseEvent && event.detail > 0) {
-            event.preventDefault()
-        }
-    })
-
     checkbox.addEventListener('mousedown', () => {
         const newState = !checkbox.checked
         checkswipeGlobalCheckboxState = newState
@@ -22,6 +15,13 @@ function checkswipeAttachSingle(checkbox, parent) {
         if (checkswipeCurrentFieldset === parent && checkswipeGlobalCheckboxState !== undefined && checkswipeGlobalCheckboxState !== checkbox.checked) {
             checkbox.checked = checkswipeGlobalCheckboxState
             checkbox.dispatchEvent(new Event('change'))
+        }
+    })
+
+    checkbox.addEventListener('click', (event) => {
+        // prevent default when clicking directly on the checkbox (not when clicking on labels)
+        if (event instanceof MouseEvent && event.detail > 0) {
+            event.preventDefault()
         }
     })
 }
