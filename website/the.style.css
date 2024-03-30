@@ -41,10 +41,6 @@ header .slogan {
   gap: 2em;
 }
 
-.game {
-  width: 200px;
-}
-
 .game button[type=reset] {
   padding-block: 0.4em;
 }
