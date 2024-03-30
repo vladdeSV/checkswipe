@@ -39,6 +39,10 @@ header .slogan {
   width: 200px;
 }
 
+.game button[type=reset] {
+  padding-block: 0.4em;
+}
+
 [data-timer] {
   font-family: monospace;
 }

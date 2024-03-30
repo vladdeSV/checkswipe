@@ -78,7 +78,7 @@
                     </fieldset>
                     <p><span data-timer data-best-display=–>–</span></p>
                     <div class=reset>
-                        <button type=reset>reset</button>
+                        <button type=reset>reset timer</button>
                     </div>
                 </form>
             </div>
@@ -95,7 +95,7 @@
                     </fieldset>
                     <p><span data-timer data-best-display=–>–</span></p>
                     <div class=reset>
-                        <button type=reset>reset</button>
+                        <button type=reset>reset timer</button>
                     </div>
                 </form>
             </div>
@@ -157,7 +157,7 @@
             timerDisplay.dataset.bestDisplay = '–';
             timerDisplay.textContent = '–';
 
-            resetContainer.innerHTML = '<button type=reset>reset</button>'
+            resetContainer.innerHTML = '<button type=reset>reset timer</button>'
             const reset = resetContainer.querySelector('button[type=reset]')
             reset.addEventListener('click', () => {
                 clearInterval(intervals[form.dataset.checkswipe !== undefined ? 0 : 1]);
