@@ -20,10 +20,6 @@ label {
   display: block;
 }
 
-input[type=checkbox] + label {
-  display: inline-block;
-}
-
 header {
   display: flex;
 }
