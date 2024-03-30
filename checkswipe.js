@@ -46,8 +46,9 @@ function checkswipeAttachGroup(group) {
     }
 }
 
-// attach listeners on load
-const groups = document.querySelectorAll('[data-checkswipe]')
-for (const group of Array.from(groups)) {
-    checkswipeAttachGroup(group)
+function checkswipe() {
+    const groups = document.querySelectorAll('[data-checkswipe]')
+    for (const group of Array.from(groups)) {
+        checkswipeAttachGroup(group)
+    }
 }
