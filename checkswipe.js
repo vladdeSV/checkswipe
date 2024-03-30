@@ -1,19 +1,27 @@
-let checkswipeCurrentFieldset = undefined
-let checkswipeGlobalCheckboxState = undefined
-
 function checkswipeAttachSingle(checkbox, parent) {
     checkbox.addEventListener('mousedown', () => {
-        const newState = !checkbox.checked
-        checkswipeGlobalCheckboxState = newState
-        checkbox.checked = newState
-        checkswipeCurrentFieldset = parent
-        parent.dataset.checkswipe = 'enlarged'
+        const state = !checkbox.checked
+        checkbox.checked = state
+        parent.dataset.checkswipe = state ? 'checked' : 'unchecked'
         checkbox.dispatchEvent(new Event('change'))
+
+        const temporaryMouseUpHandler = () => {
+            parent.dataset.checkswipe = ''
+            document.removeEventListener('mouseup', temporaryMouseUpHandler)
+        }
+
+        document.addEventListener('mouseup', temporaryMouseUpHandler)
     })
 
     checkbox.addEventListener('mousemove', () => {
-        if (checkswipeCurrentFieldset === parent && checkswipeGlobalCheckboxState !== undefined && checkswipeGlobalCheckboxState !== checkbox.checked) {
-            checkbox.checked = checkswipeGlobalCheckboxState
+        let state = parent.dataset.checkswipe
+        if (state !== 'checked' && state !== 'unchecked') {
+            return
+        }
+
+        const checked = state === 'checked'
+        if (checked !== checkbox.checked) {
+            checkbox.checked = checked
             checkbox.dispatchEvent(new Event('change'))
         }
     })
@@ -37,16 +45,6 @@ function checkswipeAttachGroup(group) {
         checkswipeAttachSingle(checkbox, group)
     }
 }
-
-document.addEventListener('mouseup', () => {
-    if (!checkswipeCurrentFieldset) {
-        return
-    }
-
-    checkswipeCurrentFieldset.dataset.checkswipe = ''
-    checkswipeGlobalCheckboxState = undefined
-    checkswipeCurrentFieldset = undefined
-})
 
 // attach listeners on load
 const groups = document.querySelectorAll('[data-checkswipe]')
