@@ -37,7 +37,7 @@ function resetGame() {
         resetContainer.innerHTML = '<button type=reset>reset timer</button>'
         const reset = resetContainer.querySelector('button[type=reset]')
         reset.addEventListener('click', () => {
-            clearInterval(intervals[form.dataset.checkswipe !== undefined ? 0 : 1]);
+            clearInterval(intervals[fieldset.dataset.checkswipe !== undefined ? 0 : 1]);
             timerStarted = false;
             timer = 0;
             timerDisplay.textContent = '–';
@@ -56,7 +56,7 @@ function resetGame() {
         });
 
         function startTimer() {
-            intervals[form.dataset.checkswipe !== undefined ? 0 : 1] = setInterval(() => {
+            intervals[fieldset.dataset.checkswipe !== undefined ? 0 : 1] = setInterval(() => {
                 timer++;
                 let displayNumber = timer / 100
                 timerDisplay.textContent = displayNumber.toFixed(2) + 's';
@@ -66,7 +66,7 @@ function resetGame() {
         function checkCompletion() {
             const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
             if (allChecked) {
-                clearInterval(intervals[form.dataset.checkswipe !== undefined ? 0 : 1]);
+                clearInterval(intervals[fieldset.dataset.checkswipe !== undefined ? 0 : 1]);
                 let best = timerDisplay.dataset.best;
                 if (best === undefined || best === '' || timer < best) {
                     timerDisplay.dataset.best = String(timer);
