@@ -32,12 +32,8 @@ header > .logo {
   display: flex;
 }
 
-header h1 {
-  margin-block-start: 0;
-}
-
-header .slogan {
-  margin: 0;
+header > .logo > hgroup {
+  margin-bottom: 0;
 }
 
 .playfield {
@@ -91,11 +87,11 @@ code {
 #logo-demo {
   position: relative;
   display: grid;
-  gap: 0.6em;
+  gap: 0.4em;
   padding-top: 0.55em;
   padding-bottom: 0.28em;
   box-sizing: border-box;
-  margin-right: 1.7em;
+  margin-right: 1.5em;
   --demo-dur: 4s;
 }
 
