@@ -1,11 +1,18 @@
 .touchscreen-only {
   display: none;
   margin-top: 3em;
+  border-radius: 0.5em;
+  padding: 1em;
+  background: #ffcc2244;
+
+  & > header {
+    background: inherit;
+  }
 }
 
 @media (hover: none) and (pointer: coarse) {
   .touchscreen-only {
-    display: unset;
+    display: block;
   }
 }
 
