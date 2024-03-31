@@ -9,6 +9,10 @@ function checkswipe(parent, checkbox) {
      * @param {HTMLElement} parent
      */
     function attachSingle(checkbox, parent) {
+        if (!parent.dataset.checkswipe) {
+            parent.dataset.checkswipe = ''
+        }
+
         checkbox.addEventListener('mousedown', () => {
             const state = !checkbox.checked
             checkbox.checked = state
@@ -48,9 +52,6 @@ function checkswipe(parent, checkbox) {
      */
     function attachGroup(group) {
         const checkboxes = group.querySelectorAll('input[type=checkbox]')
-        if (!group.dataset.checkswipe) {
-            group.dataset.checkswipe = ''
-        }
         checkboxes.forEach(checkbox => attachSingle(checkbox, group))
     }
 
