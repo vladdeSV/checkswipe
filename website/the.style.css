@@ -36,6 +36,11 @@ label {
   margin-bottom: 0;
 }
 
+code.version {
+  font-size: 0.3em;
+  vertical-align: middle;
+}
+
 .playfield {
   display: inline-block;
 }
