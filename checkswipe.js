@@ -9,6 +9,10 @@ function checkswipe(parent, checkbox) {
      * @param {HTMLElement} parent
      */
     function attachSingle(checkbox, parent) {
+        if (!parent.contains(checkbox)) {
+            throw new Error('checkswipe: `checkbox` must be a child of `parent`')
+        }
+
         if (!parent.dataset.checkswipe) {
             parent.dataset.checkswipe = ''
         }
