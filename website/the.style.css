@@ -28,11 +28,11 @@ label {
   display: block;
 }
 
-header > .logo {
+.logo {
   display: flex;
 }
 
-header > .logo > hgroup {
+.logo > hgroup {
   margin-bottom: 0;
 }
 
