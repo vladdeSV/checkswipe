@@ -96,7 +96,8 @@ code {
   padding-top: 0.55em;
   padding-bottom: 0.28em;
   box-sizing: border-box;
-  margin-right: 1.5em;
+  width: 0.65em;
+  margin-right: 0.65em;
   --demo-dur: 4s;
 }
 
