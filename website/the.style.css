@@ -42,12 +42,27 @@ code.version {
 }
 
 .playfield {
-  display: inline-block;
+  display: grid;
+  gap: 0.5em 2em;
+  max-width: 500px;
+  margin: 2em auto;
+  grid-template-rows: auto auto; /* Define two rows */
+  grid-template-columns: 1fr 1fr; /* Define two columns of equal width */
+  grid-template-areas:
+    "a a" /* first row, one element spanning two columns */
+    "b c"; /* second row, two elements */
 }
 
-.playfield > div {
-  display: flex;
-  gap: 2em;
+.playfield > label {
+  grid-area: a;
+}
+
+.playfield > div:first-of-type {
+  grid-area: b;
+}
+
+.playfield > div:last-of-type {
+  grid-area: c;
 }
 
 .game button[type=reset] {
