@@ -28,6 +28,18 @@ label {
   display: block;
 }
 
+.sbs {
+  display: inline-grid;
+  gap: 2em;
+  grid-template-columns: 1fr 1fr;
+}
+
+.sbs::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
 .logo {
   display: flex;
 }

@@ -145,6 +145,26 @@
     <p>Checkboxes growing larger is pure and simple <abbr title='cascading style sheets'>CSS</abbr>, and is not required – but recommended.</p>
     <p>Very self-contained. Only the group and its checkboxes within are affected. At worst, on a <code>mousedown</code> event, a temporary self-removing <code>mouseup</code> handler is applied to the page to detect when the user releases the mouse button.</p>
     <p>Note: Each <code>&lt;<span class=kw>input</span> <span class=attr>type</span>=<span class=v>checkbox</span>&gt;</code> gets event listeners – adding or replacing checkboxes requires to re-run code for those checkboxes.</p>
+
+    <h2>Examples</h2>
+    <p>These are some use-cases of Checkswipe.js, where you can see how versetile it is.</p>
+
+    <h3>Multiple groups</h3>
+    <p>Groups can be used on the same page, and they will not interfere with each other.</p>
+    <div class=sbs>
+      <fieldset data-checkswipe>
+        <legend>Group 1</legend>
+        <label><input type=checkbox> Option 1</label>
+        <label><input type=checkbox> Option 2</label>
+        <label><input type=checkbox> Option 3</label>
+      </fieldset>
+      <fieldset data-checkswipe>
+        <legend>Group 2</legend>
+        <label><input type=checkbox> Option 1</label>
+        <label><input type=checkbox> Option 2</label>
+        <label><input type=checkbox> Option 3</label>
+      </fieldset>
+    </div>
 </main>
 </body>
 
