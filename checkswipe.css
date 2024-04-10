@@ -13,8 +13,3 @@
 [data-checkswipe]:not([data-checkswipe='']) input[type=checkbox] {
   transform: scale(var(--checkswipe-scale));
 }
-
-/* todo:
-    how well supported is `:is()`?
-    ah, no IE9 support :(
-*/
