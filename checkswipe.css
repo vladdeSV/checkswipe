@@ -10,8 +10,7 @@
   transition: transform var(--checkswipe-duration) var(--checkswipe-easing) var(--checkswipe-delay);
 }
 
-[data-checkswipe=checked] input[type=checkbox],
-[data-checkswipe=unchecked] input[type=checkbox] {
+[data-checkswipe]:not([data-checkswipe='']) input[type=checkbox] {
   transform: scale(var(--checkswipe-scale));
 }
 
