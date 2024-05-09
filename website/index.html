@@ -167,14 +167,28 @@
     </div>
 
     <h3>Only target specific checkboxes</h3>
-    <p>Checkswipe can be applied to specific checkboxes, and not the entire group.</p>
-    <table data-checkswipe data-checkswipe-specify>
+    <p>Include the attribute <code><span class=attr>data-checkswipe-use</span></code> on the checkboxes you want to be swipeable, and the other checkboxes will remain untouched.</p>
+
+    <fieldset data-checkswipe>
+      <legend>Semi-swipeable checkboxes</legend>
+      <label><input type=checkbox data-checkswipe-use> Option 1</label>
+      <label><input type=checkbox data-checkswipe-use> Option 2</label>
+      <label><input type=checkbox> Option 3 (non-swipeable)</label>
+      <label><input type=checkbox data-checkswipe-use> Option 4</label>
+      <label><input type=checkbox data-checkswipe-use> Option 5</label>
+    </fieldset>
+
+    <h4>Tables</h4>
+    <p>Tables are a bit cumbersome since they do not follow a conventional structure, but it's possible to only make checkboxes in certain columns swipeable.</p>
+    <p>If you want to group different columns of checkboxes together, you unfortunately are out of luck.</p>
+
+    <table data-checkswipe>
       <thead>
         <tr>
           <th>Swipeable</th>
           <th>Text</th>
-          <th>Optional 1</th>
-          <th>Optional 2</th>
+          <th>Non-swipe 1</th>
+          <th>Non-swipe 2</th>
         </tr>
       </thead>
       <tbody>
