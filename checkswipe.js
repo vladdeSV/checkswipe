@@ -21,6 +21,10 @@ function checkswipe(parent, checkbox) {
             return
         }
 
+        if (parent.dataset.checkswipeSpecify === undefined && checkbox.dataset.checkswipeUse !== undefined) {
+            throw new Error('checkswipe: `checkbox` is specified to be used (with `data-checkswipe-use`), but `parent` does not have `data-checkswipe-specify` attribute. this is not allowed as it causes inconsistencies – please do not manually checkswipe-ify single checkboxes without proper attributes on the parent.')
+        }
+
         checkbox.addEventListener('mousedown', () => {
             const state = !checkbox.checked
             checkbox.checked = state
