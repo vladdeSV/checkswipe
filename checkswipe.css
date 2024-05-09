@@ -6,10 +6,12 @@
   --checkswipe-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-[data-checkswipe] input[type=checkbox] {
+[data-checkswipe]:not([data-checkswipe-specify]) input[type=checkbox],
+[data-checkswipe][data-checkswipe-specify] input[type=checkbox][data-checkswipe-use] {
   transition: transform var(--checkswipe-duration) var(--checkswipe-easing) var(--checkswipe-delay);
 }
 
-[data-checkswipe]:not([data-checkswipe='']) input[type=checkbox] {
+[data-checkswipe]:not([data-checkswipe='']):not([data-checkswipe-specify]) input[type=checkbox],
+[data-checkswipe][data-checkswipe-specify]:not([data-checkswipe='']) input[type=checkbox][data-checkswipe-use]{
   transform: scale(var(--checkswipe-scale));
 }
