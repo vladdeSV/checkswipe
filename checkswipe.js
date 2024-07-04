@@ -63,11 +63,6 @@ function checkswipe(parent, checkbox) {
      * @param {HTMLElement} group
      */
     function attachGroup(group) {
-        const hasSpecificCheckbox = group.querySelector('[data-checkswipe-use]') !== null
-        if (hasSpecificCheckbox && group.dataset.checkswipeSpecify === undefined) {
-            group.dataset.checkswipeSpecify = ''
-        }
-
         const checkboxes = group.querySelectorAll('input[type=checkbox]')
         checkboxes.forEach(checkbox => attachSingle(checkbox, group) && console.log('----'))
     }
