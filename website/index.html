@@ -167,9 +167,9 @@
     </div>
 
     <h3>Only target specific checkboxes</h3>
-    <p>Include the attribute <code><span class=attr>data-checkswipe-use</span></code> on the checkboxes you want to be swipeable, and the other checkboxes will remain untouched.</p>
+    <p>Include the attribute <code><span class=attr>data-checkswipe-specify</span></code> on the group, and add the attribute <code><span class=attr>data-checkswipe-use</span></code> on the checkboxes you want to be swipeable, and the other checkboxes will remain untouched.</p>
 
-    <fieldset data-checkswipe>
+    <fieldset data-checkswipe data-checkswipe-specify>
       <legend>Semi-swipeable checkboxes</legend>
       <label><input type=checkbox data-checkswipe-use> Option 1</label>
       <label><input type=checkbox data-checkswipe-use> Option 2</label>
@@ -179,10 +179,10 @@
     </fieldset>
 
     <h4>Tables</h4>
-    <p>Tables are a bit cumbersome since they do not follow a conventional structure, but it's possible to only make checkboxes in certain columns swipeable.</p>
+    <p>Tables are a bit cumbersome since they do not follow a conventional "grouped" structure, but it's possible to only make checkboxes in certain columns swipeable.</p>
     <p>If you want to group different columns of checkboxes together, you unfortunately are out of luck.</p>
 
-    <table data-checkswipe>
+    <table data-checkswipe data-checkswipe-specify>
       <thead>
         <tr>
           <th>Swipeable</th>
