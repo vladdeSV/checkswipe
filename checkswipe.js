@@ -17,6 +17,14 @@ function checkswipe(parent, checkbox) {
             parent.dataset.checkswipe = ''
         }
 
+        if (parent.dataset.checkswipeSpecify !== undefined && checkbox.dataset.checkswipeUse === undefined) {
+            return
+        }
+
+        if (parent.dataset.checkswipeSpecify === undefined && checkbox.dataset.checkswipeUse !== undefined) {
+            throw new Error('checkswipe: `checkbox` is set to be specifically used (with `data-checkswipe-use`), but `parent` does not have `data-checkswipe-specify` attribute. this is not allowed as it causes inconsistencies – please do not manually checkswipe-ify single checkboxes without proper attributes on the parent.')
+        }
+
         checkbox.addEventListener('mousedown', () => {
             const state = !checkbox.checked
             checkbox.checked = state
@@ -56,7 +64,7 @@ function checkswipe(parent, checkbox) {
      */
     function attachGroup(group) {
         const checkboxes = group.querySelectorAll('input[type=checkbox]')
-        checkboxes.forEach(checkbox => attachSingle(checkbox, group))
+        checkboxes.forEach(checkbox => attachSingle(checkbox, group) && console.log('----'))
     }
 
     if (!parent && !checkbox) {
