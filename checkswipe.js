@@ -64,7 +64,7 @@ function checkswipe(parent, checkbox) {
      */
     function attachGroup(group) {
         const checkboxes = group.querySelectorAll('input[type=checkbox]')
-        checkboxes.forEach(checkbox => attachSingle(checkbox, group) && console.log('----'))
+        checkboxes.forEach(checkbox => attachSingle(checkbox, group))
     }
 
     if (!parent && !checkbox) {
