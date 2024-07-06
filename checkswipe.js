@@ -37,6 +37,12 @@ function checkswipe(parent, checkbox) {
             return
         }
 
+        if (checkbox.__checkswipe) {
+            return
+        }
+
+        checkbox.__checkswipe = true
+
         checkbox.addEventListener('mousedown', () => {
             const state = !checkbox.checked
             checkbox.checked = state
