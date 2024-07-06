@@ -9,6 +9,16 @@ function checkswipe(parent, checkbox) {
      * @param {HTMLElement} parent
      */
     function attachSingle(checkbox, parent) {
+        if (!(parent instanceof HTMLElement)) {
+            console.error('checkswipe: parent', parent, 'must be an HTMLElement.')
+            return
+        }
+
+        if (!(checkbox instanceof HTMLInputElement) || checkbox.type !== 'checkbox') {
+            console.error('checkswipe: element', checkbox, 'must be a checkbox.')
+            return
+        }
+
         if (!parent.contains(checkbox)) {
             console.error('checkswipe: checkbox', checkbox, 'must be a child of parent', parent, '.')
             return
@@ -65,7 +75,12 @@ function checkswipe(parent, checkbox) {
      * @param {HTMLElement} group
      */
     function attachGroup(group) {
-        const hasSpecificCheckbox = group.querySelector('input[data-checkswipe-use]') !== null
+        if (!(group instanceof HTMLElement)) {
+            console.error('checkswipe: group', group, 'must be an HTMLElement.')
+            return
+        }
+
+        const hasSpecificCheckbox = group.querySelector('input[type=checkbox][data-checkswipe-use]') !== null
         if (hasSpecificCheckbox && group.dataset.checkswipeSpecify === undefined) {
             console.error('checkswipe: group', group, 'is missing attribute `data-checkswipe-specify`; has checkboxes with attribute `data-checkswipe-use`. this is not allowed.')
             return
