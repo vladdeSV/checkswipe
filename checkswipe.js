@@ -14,6 +14,11 @@ function checkswipe(parent, checkbox) {
             return
         }
 
+        if (parent.parentElement?.closest('[data-checkswipe]') || parent.querySelector('[data-checkswipe]')) {
+            console.error('checkswipe: invalid structure for', parent,'; nested `data-checkswipe` elements are not allowed.')
+            return
+        }
+
         if (!(checkbox instanceof HTMLInputElement) || checkbox.type !== 'checkbox') {
             console.error('checkswipe: element', checkbox, `must be an html input element (type checkbox); is '${typeof checkbox}'.`)
             return
@@ -83,6 +88,11 @@ function checkswipe(parent, checkbox) {
     function attachGroup(group) {
         if (!(group instanceof HTMLElement)) {
             console.error('checkswipe: element', group, `must be an html element; is '${typeof group}'.`)
+            return
+        }
+
+        if (group.parentElement?.closest('[data-checkswipe]') || group.querySelector('[data-checkswipe]')) {
+            console.error('checkswipe: invalid structure for', group,'; nested `data-checkswipe` elements are not allowed.')
             return
         }
 
