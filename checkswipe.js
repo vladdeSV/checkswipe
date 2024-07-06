@@ -10,7 +10,8 @@ function checkswipe(parent, checkbox) {
      */
     function attachSingle(checkbox, parent) {
         if (!parent.contains(checkbox)) {
-            throw new Error('checkswipe: `checkbox` must be a child of `parent`')
+            console.error('checkswipe: checkbox', checkbox, 'must be a child of parent', parent, '.')
+            return
         }
 
         if (!parent.dataset.checkswipe) {
@@ -22,7 +23,8 @@ function checkswipe(parent, checkbox) {
         }
 
         if (parent.dataset.checkswipeSpecify === undefined && checkbox.dataset.checkswipeUse !== undefined) {
-            throw new Error('checkswipe: `checkbox` is set to be specifically used (with `data-checkswipe-use`), but `parent` does not have `data-checkswipe-specify` attribute. this is not allowed as it causes inconsistencies – please do not manually checkswipe-ify single checkboxes without proper attributes on the parent.')
+            console.error('checkswipe: checkbox', checkbox, 'is set to be specifically used (with `data-checkswipe-use`), but parent', parent, 'does not have `data-checkswipe-specify` attribute. this is not allowed as it causes inconsistencies – please do not manually checkswipe-ify single checkboxes without proper attributes on the parent.')
+            return
         }
 
         checkbox.addEventListener('mousedown', () => {
@@ -65,7 +67,8 @@ function checkswipe(parent, checkbox) {
     function attachGroup(group) {
         const hasSpecificCheckbox = group.querySelector('input[data-checkswipe-use]') !== null
         if (hasSpecificCheckbox && group.dataset.checkswipeSpecify === undefined) {
-            throw new Error('checkswipe: group has checkboxes with attribute `data-checkswipe-use`, but group itself is missing `data-checkswipe-specify` attribute. this is not allowed.')
+            console.error('checkswipe: group', group, 'is missing attribute `data-checkswipe-specify`; has checkboxes with attribute `data-checkswipe-use`. this is not allowed.')
+            return
         }
 
         const checkboxes = group.querySelectorAll('input[type=checkbox]')
@@ -80,6 +83,7 @@ function checkswipe(parent, checkbox) {
     } else if (parent && checkbox) {
         attachSingle(checkbox, parent)
     } else {
-        throw new Error('checkswipe: `parent` cannot be missing if `checkbox` is provided')
+        console.error('checkswipe: parameter `parent` cannot be missing if `checkbox` is provided.')
+        return
     }
 }
