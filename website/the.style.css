@@ -109,6 +109,10 @@ code {
   }
 }
 
+hgroup > :is(h1, p) {
+  margin: 0;
+}
+
 /* logo animation */
 #logo-demo {
   position: relative;
