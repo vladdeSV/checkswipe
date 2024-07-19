@@ -106,7 +106,9 @@ function checkswipe(parent, checkbox) {
         checkboxes.forEach(checkbox => attachSingle(checkbox, group))
     }
     
-    checkswipe.init()
+    if (!checkswipe.__injected) {
+        checkswipe.inject()
+    }
 
     if (!parent && !checkbox) {
         const groups = document.querySelectorAll('[data-checkswipe]')
@@ -121,9 +123,9 @@ function checkswipe(parent, checkbox) {
     }
 }
 
-checkswipe.init = function () {
+checkswipe.inject = function () {
     if (document.querySelector('head>style#checkswipe-injected')) {
-        // console.debug('checkswipe: already inited, skipping injection of style...')
+        console.warn('checkswipe: injected styles already exists, skipping injection of style...')
         return
     }
 
@@ -134,7 +136,7 @@ checkswipe.init = function () {
 
     let style = document.createElement('style')
     style.id = 'checkswipe-injected'
-    if (nonce) {
+    if (typeof nonce === 'string') {
         style.setAttribute('nonce', nonce)
     }
     
@@ -159,4 +161,5 @@ checkswipe.init = function () {
 `
 
     document.head.appendChild(style)
+    checkswipe.__injected = true
 }
