@@ -31,7 +31,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v4
       - run: cp checkswipe.js website/checkswipe.js
-      - run: cp checkswipe.css website/checkswipe.css
       - run: curl 'https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css' -o website/pico.classless.min.css
       - run: curl 'https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png' -o website/buymeacoffee.png
       - uses: actions/upload-pages-artifact@v3
