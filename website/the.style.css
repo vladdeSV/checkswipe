@@ -103,10 +103,22 @@ code {
   & .v {
     color: #00a66e;
   }
+  
+  & .p {
+    color: #59c1ff;
+  }
+  
+  & .n {
+    color: #d2a6ff
+  }
 
   & .comment {
     color: #767676;
   }
+}
+
+hgroup > :is(h1, p) {
+  margin: 0;
 }
 
 /* logo animation */

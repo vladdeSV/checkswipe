@@ -1,9 +1,4 @@
-/**
- * @param {HTMLElement} [parent]
- * @param {HTMLInputElement} [checkbox]
- */
-function checkswipe(parent, checkbox) {
-
+function checkswipe() {
     /**
      * @param {HTMLInputElement} checkbox
      * @param {HTMLElement} parent
@@ -15,7 +10,7 @@ function checkswipe(parent, checkbox) {
         }
 
         if (parent.parentElement?.closest('[data-checkswipe]') || parent.querySelector('[data-checkswipe]')) {
-            console.error('checkswipe: invalid structure for', parent,'; nested `data-checkswipe` elements are not allowed.')
+            console.error('checkswipe: invalid structure for', parent, '; nested `data-checkswipe` elements are not allowed.')
             return
         }
 
@@ -75,7 +70,7 @@ function checkswipe(parent, checkbox) {
             }
         })
 
-        checkbox.addEventListener('click', (event) => {
+        checkbox.addEventListener('click', event => {
             if (event instanceof MouseEvent && event.detail > 0) {
                 event.preventDefault()
             }
@@ -92,7 +87,7 @@ function checkswipe(parent, checkbox) {
         }
 
         if (group.parentElement?.closest('[data-checkswipe]') || group.querySelector('[data-checkswipe]')) {
-            console.error('checkswipe: invalid structure for', group,'; nested `data-checkswipe` elements are not allowed.')
+            console.error('checkswipe: invalid structure for', group, '; nested `data-checkswipe` elements are not allowed.')
             return
         }
 
@@ -106,15 +101,50 @@ function checkswipe(parent, checkbox) {
         checkboxes.forEach(checkbox => attachSingle(checkbox, group))
     }
 
-    if (!parent && !checkbox) {
-        const groups = document.querySelectorAll('[data-checkswipe]')
-        groups.forEach(group => attachGroup(group))
-    } else if (parent && !checkbox) {
-        attachGroup(parent)
-    } else if (parent && checkbox) {
-        attachSingle(checkbox, parent)
-    } else {
-        console.error('checkswipe: parameter `parent` cannot be missing if `checkbox` is provided.')
+    if (typeof checkswipe.inject === 'function') {
+        checkswipe.inject()
+    }
+
+    const groups = document.querySelectorAll('[data-checkswipe]')
+    groups.forEach(group => attachGroup(group))
+
+    checkswipe.on = attachGroup
+}
+
+checkswipe.inject = function (nonce) {
+    // nuclear option >:)
+    checkswipe.inject = undefined
+
+    if (document.querySelector('head>style#checkswipe-injected')) {
+        console.warn('checkswipe: injected styles already exists, skipping injection of style...')
         return
     }
+
+    let style = document.createElement('style')
+    style.id = 'checkswipe-injected'
+    if (typeof nonce === 'string') {
+        style.setAttribute('nonce', nonce)
+    }
+
+    style.textContent = `
+:root {
+    /* checkswipe defaults */
+    --checkswipe-scale: 1.3;
+    --checkswipe-delay: 0.1s;
+    --checkswipe-duration: 0.1s;
+    --checkswipe-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+[data-checkswipe]:not([data-checkswipe-specify]) input[type=checkbox],
+[data-checkswipe][data-checkswipe-specify] input[type=checkbox][data-checkswipe-use] {
+    transition: transform var(--checkswipe-duration) var(--checkswipe-easing) var(--checkswipe-delay);
+}
+
+[data-checkswipe]:not([data-checkswipe='']):not([data-checkswipe-specify]) input[type=checkbox],
+[data-checkswipe][data-checkswipe-specify]:not([data-checkswipe='']) input[type=checkbox][data-checkswipe-use] {
+    transform: scale(var(--checkswipe-scale));
+}
+`
+
+    document.head.appendChild(style)
 }
