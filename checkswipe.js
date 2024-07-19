@@ -105,6 +105,8 @@ function checkswipe(parent, checkbox) {
         const checkboxes = group.querySelectorAll('input[type=checkbox]')
         checkboxes.forEach(checkbox => attachSingle(checkbox, group))
     }
+    
+    checkswipe.init()
 
     if (!parent && !checkbox) {
         const groups = document.querySelectorAll('[data-checkswipe]')
@@ -117,4 +119,44 @@ function checkswipe(parent, checkbox) {
         console.error('checkswipe: parameter `parent` cannot be missing if `checkbox` is provided.')
         return
     }
+}
+
+checkswipe.init = function () {
+    if (document.querySelector('head>style#checkswipe-injected')) {
+        // console.debug('checkswipe: already inited, skipping injection of style...')
+        return
+    }
+
+    let nonce = checkswipe.nonce
+    if (typeof nonce !== 'string') {
+        nonce = undefined
+    }
+
+    let style = document.createElement('style')
+    style.id = 'checkswipe-injected'
+    if (nonce) {
+        style.setAttribute('nonce', nonce)
+    }
+    
+    style.textContent = `
+:root {
+    /* checkswipe defaults */
+    --checkswipe-scale: 1.3;
+    --checkswipe-delay: 0.1s;
+    --checkswipe-duration: 0.1s;
+    --checkswipe-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+[data-checkswipe]:not([data-checkswipe-specify]) input[type=checkbox],
+[data-checkswipe][data-checkswipe-specify] input[type=checkbox][data-checkswipe-use] {
+    transition: transform var(--checkswipe-duration) var(--checkswipe-easing) var(--checkswipe-delay);
+}
+
+[data-checkswipe]:not([data-checkswipe='']):not([data-checkswipe-specify]) input[type=checkbox],
+[data-checkswipe][data-checkswipe-specify]:not([data-checkswipe='']) input[type=checkbox][data-checkswipe-use] {
+    transform: scale(var(--checkswipe-scale));
+}
+`
+
+    document.head.appendChild(style)
 }

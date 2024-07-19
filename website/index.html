@@ -19,8 +19,7 @@
     <script defer src=you.lost.the.game.js></script>
 
     <!-- only things related to checkswipe -->
-    <script defer src=checkswipe.js onload=checkswipe()></script>
-    <link rel=stylesheet href=checkswipe.css>
+    <script defer src=checkswipe.js onload='checkswipe.nonce = "123abc"; checkswipe()'></script>
 </head>
 
 <body>
@@ -60,8 +59,8 @@
     </form>
 
     <h2>Get it</h2>
-    <p>Import the library with these two lines:</p>
-    <pre><code>&lt;<span class=kw>script</span> <span class=attr>defer</span> <span class=attr>src</span>=<span class=v>/js/checkswipe.js</span> <span class=attr>onload</span>=<span class=fn>checkswipe</span>()&gt;&lt;/<span class=kw>script</span>&gt;<br>&lt;<span class=kw>link</span> <span class=attr>rel</span>=<span class=v>stylesheet</span> <span class=attr>href</span>=<span class=v>/css/checkswipe.css</span>&gt;</code></pre>
+    <p>Import the library with this line of code:</p>
+    <pre><code>&lt;<span class=kw>script</span> <span class=attr>src</span>=<span class=v>/js/checkswipe.js</span> <span class=attr>defer</span> <span class=attr>onload</span>=<span class=fn>checkswipe</span>()&gt;&lt;/<span class=kw>script</span>&gt;</code></pre>
     <p>Add the attribute <code><span class=attr>data-checkswipe</span></code> to any group.</p>
     <pre><code>&lt;<span class=kw>fieldset</span> <mark><span class=attr>data-checkswipe</span></mark>&gt;<br>  &lt;<span class=kw>input</span> <span class=attr>type</span>=<span class=v>checkbox</span>&gt;<br>  &lt;<span class=kw>input</span> <span class=attr>type</span>=<span class=v>checkbox</span>&gt;<br>&lt;/<span class=kw>fieldset</span>&gt;</code></pre>
     <p>See the <a href=https://github.com/vladdeSV/checkswipe/releases/latest>latest release</a> and the <a href=https://github.com/vladdeSV/checkswipe>source code</a> on GitHub.</p>
@@ -132,9 +131,16 @@
     </ol>
 
     <aside>
-        <p>Checkswipe can be manually applied to any element, or specific checkboxes:</p>
+        <p>Checkswipe.js can be manually applied to any element, or specific checkboxes:</p>
         <pre><code><span class=fn>checkswipe</span>()                <span class=comment>// all <span class=attr>[data-checkswipe]</span> on page</span><br><span class=fn>checkswipe</span>(group)           <span class=comment>// eg. checkswipe(myDiv)</span><br><span class=fn>checkswipe</span>(group, checkbox) <span class=comment>// eg. checkswipe(myDiv, checkbox)</span></code></pre>
     </aside>
+
+    <h3>Content Security Policy</h3>
+    <p>Checkswipe.js injects a <code>&lt;<span class=kw>style</span> <span class=attr>id</span>=<span class=v>checkswipe-injected</span>&gt;</code> into the document's <code>&lt;<span class=kw>head</span>&gt;</code> for animations. If your website has a restrictive <abbr title="content security policy">CSP</abbr>, you can either:</p>
+    <ol style="list-style: lower-alpha;">
+        <li>set a nonce before running the function<pre><code>&lt;<span class=kw>script</span> … <span class=attr>onload</span>=<span class=v>'</span><span class=fn>checkswipe</span>.nonce=<span class=v>"abc123"</span>;<span class=fn>checkswipe</span>()<span class=v>'</span>></code></pre></li>
+        <li>manually copy-and-paste the styling and put it your own CSS files</li>
+    </ol>
 
     <h2>Love it?</h2>
     <p>If this little project made you smile, send me a virtual coffee – it boosts my ego.</p>
@@ -144,7 +150,7 @@
     <p><code><span class=fn>checkswipe</span>()</code> looks for every <code>&lt;<span class=kw><i>element</i></span>&gt;</code> with the attribute <code><span class=attr>data-checkswipe</span></code>, and attaches a listener to each checkbox inside.</p>
     <p>Each <code>&lt;<span class=kw><i>element</i></span>&gt;</code> is independent, and only checkboxes within them can be swiped.</p>
     <p>Intentionally only activates when pressing and dragging over checkboxes – does not affect labels and their text.</p>
-    <p>Checkboxes growing larger is pure and simple <abbr title='cascading style sheets'>CSS</abbr>, and is not required – but recommended.</p>
+    <p>Checkboxes growing larger is pure and simple CSS, and is not required – but recommended.</p>
     <p>Very self-contained. Only the group and its checkboxes within are affected. At worst, on a <code>mousedown</code> event, a temporary self-removing <code>mouseup</code> handler is applied to the page to detect when the user releases the mouse button.</p>
     <p>Note: Each <code>&lt;<span class=kw>input</span> <span class=attr>type</span>=<span class=v>checkbox</span>&gt;</code> gets event listeners – adding or replacing checkboxes requires to re-run code for those checkboxes.</p>
 
