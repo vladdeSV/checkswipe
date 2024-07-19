@@ -105,7 +105,7 @@ function checkswipe(parent, checkbox) {
         checkboxes.forEach(checkbox => attachSingle(checkbox, group))
     }
 
-    if (!checkswipe.__injected) {
+    if (typeof checkswipe.inject === 'function') {
         checkswipe.inject()
     }
 
@@ -123,6 +123,9 @@ function checkswipe(parent, checkbox) {
 }
 
 checkswipe.inject = function (nonce) {
+    // nuclear option >:)
+    checkswipe.inject = undefined
+
     if (document.querySelector('head>style#checkswipe-injected')) {
         console.warn('checkswipe: injected styles already exists, skipping injection of style...')
         return
@@ -155,5 +158,4 @@ checkswipe.inject = function (nonce) {
 `
 
     document.head.appendChild(style)
-    checkswipe.__injected = true
 }
