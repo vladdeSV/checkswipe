@@ -45,7 +45,7 @@ function resetGame() {
         });
 
         checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('mousedown', () => {
+            checkbox.parentElement.addEventListener('mousedown', () => {
                 if (!timerStarted) {
                     startTimer();
                     timerStarted = true;
