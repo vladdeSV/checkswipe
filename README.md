@@ -4,7 +4,18 @@
 
 If your web application has a million (or just a couple) checkboxes aligned neatly, then this is for you. Easy to integrate with minimal added lines of code.
 
-Simply “click-and-drag” over checkboxes to enable or disable them in a flash. [Try it now](https://vladdesv.github.io/checkswipe/) and transform your web forms with unparalleled speed and simplicity!
+```html
+<script src=/js/checkswipe.js defer onload=checkswipe()></script>
+```
+
+Simply “click-and-drag” over specified checkboxes to enable or disable them in a flash. [Try it now](https://vladdesv.github.io/checkswipe/) and transform your web forms with unparalleled speed and simplicity!
+
+```html
+<div data-checkswipe>
+    <input type="checkbox" />
+    <input type="checkbox" />
+</div>
+```
 
 > [!NOTE]
 > Does not support touchscreens. Sorry!
