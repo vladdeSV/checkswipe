@@ -1,8 +1,4 @@
-/**
- * @param {HTMLElement} [parent]
- * @param {HTMLInputElement} [checkbox]
- */
-function checkswipe(parent, checkbox) {
+function checkswipe() {
     /**
      * @param {HTMLInputElement} checkbox
      * @param {HTMLElement} parent
@@ -109,17 +105,10 @@ function checkswipe(parent, checkbox) {
         checkswipe.inject()
     }
 
-    if (!parent && !checkbox) {
-        const groups = document.querySelectorAll('[data-checkswipe]')
-        groups.forEach(group => attachGroup(group))
-    } else if (parent && !checkbox) {
-        attachGroup(parent)
-    } else if (parent && checkbox) {
-        attachSingle(checkbox, parent)
-    } else {
-        console.error('checkswipe: parameter `parent` cannot be missing if `checkbox` is provided.')
-        return
-    }
+    const groups = document.querySelectorAll('[data-checkswipe]')
+    groups.forEach(group => attachGroup(group))
+
+    checkswipe.on = attachGroup
 }
 
 checkswipe.inject = function (nonce) {
