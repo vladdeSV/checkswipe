@@ -3,7 +3,6 @@
  * @param {HTMLInputElement} [checkbox]
  */
 function checkswipe(parent, checkbox) {
-
     /**
      * @param {HTMLInputElement} checkbox
      * @param {HTMLElement} parent
@@ -15,7 +14,7 @@ function checkswipe(parent, checkbox) {
         }
 
         if (parent.parentElement?.closest('[data-checkswipe]') || parent.querySelector('[data-checkswipe]')) {
-            console.error('checkswipe: invalid structure for', parent,'; nested `data-checkswipe` elements are not allowed.')
+            console.error('checkswipe: invalid structure for', parent, '; nested `data-checkswipe` elements are not allowed.')
             return
         }
 
@@ -75,7 +74,7 @@ function checkswipe(parent, checkbox) {
             }
         })
 
-        checkbox.addEventListener('click', (event) => {
+        checkbox.addEventListener('click', event => {
             if (event instanceof MouseEvent && event.detail > 0) {
                 event.preventDefault()
             }
@@ -92,7 +91,7 @@ function checkswipe(parent, checkbox) {
         }
 
         if (group.parentElement?.closest('[data-checkswipe]') || group.querySelector('[data-checkswipe]')) {
-            console.error('checkswipe: invalid structure for', group,'; nested `data-checkswipe` elements are not allowed.')
+            console.error('checkswipe: invalid structure for', group, '; nested `data-checkswipe` elements are not allowed.')
             return
         }
 
@@ -105,7 +104,7 @@ function checkswipe(parent, checkbox) {
         const checkboxes = group.querySelectorAll('input[type=checkbox]')
         checkboxes.forEach(checkbox => attachSingle(checkbox, group))
     }
-    
+
     if (!checkswipe.__injected) {
         checkswipe.inject()
     }
@@ -139,7 +138,7 @@ checkswipe.inject = function () {
     if (typeof nonce === 'string') {
         style.setAttribute('nonce', nonce)
     }
-    
+
     style.textContent = `
 :root {
     /* checkswipe defaults */
