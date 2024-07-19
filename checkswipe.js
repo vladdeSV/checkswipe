@@ -122,15 +122,10 @@ function checkswipe(parent, checkbox) {
     }
 }
 
-checkswipe.inject = function () {
+checkswipe.inject = function (nonce) {
     if (document.querySelector('head>style#checkswipe-injected')) {
         console.warn('checkswipe: injected styles already exists, skipping injection of style...')
         return
-    }
-
-    let nonce = checkswipe.nonce
-    if (typeof nonce !== 'string') {
-        nonce = undefined
     }
 
     let style = document.createElement('style')
