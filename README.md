@@ -12,8 +12,8 @@ Simply “click-and-drag” over specified checkboxes to enable or disable them 
 
 ```html
 <div data-checkswipe>
-  <input type="checkbox">
-  <input type="checkbox">
+  <input type=checkbox>
+  <input type=checkbox>
 </div>
 ```
 
