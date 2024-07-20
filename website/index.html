@@ -141,8 +141,18 @@
     <h3>Content Security Policy</h3>
     <p><code><span class=fn>checkswipe</span>()</code> initally injects a <code>&lt;<span class=kw>style</span> <span class=attr>id</span>=<span class=v>checkswipe-injected</span>&gt;</code> into the document's <code>&lt;<span class=kw>head</span>&gt;</code> for animations. If your website has a restrictive <abbr title="content security policy">CSP</abbr>, you can either:</p>
     <ol style='list-style: lower-alpha'>
-        <li>manually inject the styles with the nonce before running the function <pre><code>&lt;<span class=kw>script</span> … <span class=attr>onload</span>=<span class=v>'</span><span>checkswipe</span>.<span class=fn>inject</span>(<span class=v>"mynonce"</span>);<span class=fn>checkswipe</span>()<span class=v>'</span>></code></pre></li>
-        <li>manually copy-and-paste the styling and put it your own CSS files, and remove the injection method <pre><code>&lt;<span class=kw>script</span> … <span class=attr>onload</span>=<span class=v>'</span><span class=fn>delete</span> checkswipe.<span class=p>inject</span>;<span class=fn>checkswipe</span>()<span class=v>'</span>></code></pre></li>
+        <li>
+            manually inject the styles with the nonce before running the function
+            <pre><code>&lt;<span class=kw>script</span> … <span class=attr>onload</span>=<span class=v>'</span><span>checkswipe</span>.<span class=fn>inject</span>(<span class=v>"mynonce"</span>);<span class=fn>checkswipe</span>()<span class=v>'</span>></code></pre>
+        </li>
+        <li>
+            include the CSS file manually, and remove the injection method
+            <pre><code>&lt;<span class=kw>link</span> <span class=attr>rel</span>=<span class=v>'stylesheet'</span> <span class=attr>href</span>=<span class=v>'/css/checkswipe.css'</span>><br>&lt;<span class=kw>script</span> … <span class=attr>onload</span>=<span class=v>'</span><span class=fn>delete</span> checkswipe.<span class=p>inject</span>;<span class=fn>checkswipe</span>()<span class=v>'</span>></code></pre>
+        </li>
+        <li>
+            manually copy-and-paste the styling and put it your own CSS files, and remove the injection method
+            <pre><code>&lt;<span class=kw>script</span> … <span class=attr>onload</span>=<span class=v>'</span><span class=fn>delete</span> checkswipe.<span class=p>inject</span>;<span class=fn>checkswipe</span>()<span class=v>'</span>></code></pre>
+        </li>
     </ol>
 
     <h2>Love it?</h2>
