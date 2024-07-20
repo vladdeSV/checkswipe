@@ -117,14 +117,6 @@ code {
   }
 }
 
-hgroup > :is(h1, p) {
-  margin: 0;
-}
-
-.lib-cdn {
-  display: none;
-}
-
 .has {
     display: none;
 }
@@ -133,6 +125,14 @@ hgroup > :is(h1, p) {
   .has {
     display: block;
   }
+}
+
+hgroup > :is(h1, p) {
+  margin: 0;
+}
+
+.lib-cdn {
+  display: none;
 }
 
 label:has(#use-cdn:checked) {
