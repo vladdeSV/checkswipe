@@ -125,12 +125,12 @@ hgroup > :is(h1, p) {
   display: none;
 }
 
-#yuck {
+.has {
     display: none;
 }
 
 @supports selector(:has(*)) {
-  #yuck {
+  .has {
     display: block;
   }
 }
