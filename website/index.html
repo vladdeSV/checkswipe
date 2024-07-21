@@ -134,26 +134,28 @@
 
     <h3>Manual usage</h3>
     <p>If you wish to not use the default behavior of injecting CSS and swipe-ify the whole page you can do the process manually.</p>
-    <p><code>checkswipe.<span class=fn>inject</span>()</code> is a fire-once, blow-your-load, self-removing method that will inject CSS into the page and remove itself afterwards. If you wish to never inject CSS into the page, you can remove the method with <code><span class=fn>delete</span> checkswipe.<span class=p>inject</span></code>.</p>
     <p>To manually swipe-ify any group, you can use <code>checkswipe.<span class=fn>on</span>(group)</code> which will add the correct attribute and handle its checkboxes.</p>
+    <p><code>checkswipe.<span class=fn>inject</span>()</code> is a fire-once, blow-your-load, self-removing method that will inject CSS into the page and remove itself afterwards. If you wish to never inject CSS into the page, you can remove the method with <code><span class=fn>delete</span> checkswipe.<span class=p>inject</span></code>.</p>
 
 
     <h3>Content Security Policy</h3>
-    <p><code><span class=fn>checkswipe</span>()</code> initally injects a <code>&lt;<span class=kw>style</span> <span class=attr>id</span>=<span class=v>checkswipe-injected</span>&gt;</code> into the document's <code>&lt;<span class=kw>head</span>&gt;</code> for animations. If your website has a restrictive <abbr title="content security policy">CSP</abbr>, you can either:</p>
-    <ol style='list-style: lower-alpha'>
-        <li>
-            manually inject the styles with the nonce before running the function
-            <pre><code>&lt;<span class=kw>script</span> … <span class=attr>onload</span>=<span class=v>'</span><span>checkswipe</span>.<span class=fn>inject</span>(<span class=v>"mynonce"</span>);<span class=fn>checkswipe</span>()<span class=v>'</span>></code></pre>
-        </li>
-        <li>
-            include the CSS file manually, and remove the injection method
-            <pre><code>&lt;<span class=kw>link</span> <span class=attr>rel</span>=<span class=v>'stylesheet'</span> <span class=attr>href</span>=<span class=v>'/css/checkswipe.css'</span>><br>&lt;<span class=kw>script</span> … <span class=attr>onload</span>=<span class=v>'</span><span class=fn>delete</span> checkswipe.<span class=p>inject</span>;<span class=fn>checkswipe</span>()<span class=v>'</span>></code></pre>
-        </li>
-        <li>
-            manually copy-and-paste the styling and put it your own CSS files, and remove the injection method
-            <pre><code>&lt;<span class=kw>script</span> … <span class=attr>onload</span>=<span class=v>'</span><span class=fn>delete</span> checkswipe.<span class=p>inject</span>;<span class=fn>checkswipe</span>()<span class=v>'</span>></code></pre>
-        </li>
-    </ol>
+    <p>Checkswipe.js injects CSS by default, and the examples on this page uses the inline event handler <code><span class=fn>onload</span></code>. This might not go well on a page with a restrictive CSP.</p>
+    <details>
+        <summary>CSP Workarounds</summary>
+        <p>By default, a <code>&lt;<span class=kw>style</span> <span class=attr>id</span>=<span class=v>checkswipe-injected</span>&gt;</code> is injected into the document's <code>&lt;<span class=kw>head</span>&gt;</code> for animations. If your website has a restrictive <abbr title="content security policy">CSP</abbr>, you can use either:</p>
+        <ol style='list-style: lower-alpha'>
+            <li>
+                separate the execution of the script, and inject the styles manually with a provided nonce.
+                <pre><code>&lt;<span class=kw>script</span> <span class=attr>src</span>=<span class=v>/js/checkswipe.js</span>&gt;&lt;/<span class=kw>script</span>&gt;<br>&lt;<span class=kw>script</span> <span class=attr>nonce</span>=<span class=v>'{{ nonce }}'</span>&gt;<br>    <span>document</span>.<span class=fn>addEventListener</span>(<span class=v>'DOMContentLoaded'</span>, () => {<br>        <span>checkswipe</span>.<span class=fn>inject</span>(<span class=v>'{{ nonce }}'</span>);<br>        <span>checkswipe</span>()<br>    });<br>&lt;/<span class=kw>script</span>&gt;</code></pre>
+                <i>in this case, the js is located at an allowed location, but the inline script required a nonce. this is the appoach i used for work.</i>
+            </li>
+            <li>
+                copy-and-paste the CSS into your own allowed stylesheet, and disable the injection method in your allowed script file.
+                <pre><code>document.<span class=fn>addEventListener</span>(<span class=v>'DOMContentLoaded'</span>, () => {<br>    <span class=fn>delete</span> <span>checkswipe</span>.<span class=p>inject</span><br>    <span>checkswipe</span>()<br>});</code></pre>
+            </li>
+            <li>some variation of the two above examples.</li>
+        </ol>
+    </details>
 
     <h2>Love it?</h2>
     <p>If this little project made you smile, send me a virtual coffee – it boosts my ego.</p>
