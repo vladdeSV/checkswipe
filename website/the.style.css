@@ -117,22 +117,22 @@ code {
   }
 }
 
+.has {
+    display: none;
+}
+
+@supports selector(:has(*)) {
+  .has {
+    display: block;
+  }
+}
+
 hgroup > :is(h1, p) {
   margin: 0;
 }
 
 .lib-cdn {
   display: none;
-}
-
-#yuck {
-    display: none;
-}
-
-@supports selector(:has(*)) {
-  #yuck {
-    display: block;
-  }
 }
 
 label:has(#use-cdn:checked) {
