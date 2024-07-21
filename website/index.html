@@ -128,12 +128,12 @@
     <h2>Use it</h2>
     <p>To enable Checkswipe.js on page load:</p>
     <ol>
-        <li>add the attribute <code><span class=attr>data-checkswipe</span></code> to any element (preferably <code>&lt;<span class=kw>fieldset</span>&gt;</code>)</li>
+        <li>add the attribute <code><span class=attr>data-checkswipe</span></code> to any group (preferably <code>&lt;<span class=kw>fieldset</span>&gt;</code>)</li>
         <li>after page has loaded, run <code><span class=fn>checkswipe</span>()</code></li>
     </ol>
 
     <h3>Manual usage</h3>
-    <p>If you wish to not use the default behavior of injecting CSS and swipe-ify the whole page you can do the process manually.</p>
+    <p>If you wish to not use the default behavior of injecting CSS and swipe-ify the whole page you can do the process manually. For instance, if you do not have control of the HTML and want to swipe-ify elements dynamically.</p>
     <p>To manually swipe-ify any group, you can use <code>checkswipe.<span class=fn>on</span>(group)</code> which will add the correct attribute and handle its checkboxes.</p>
     <p><code>checkswipe.<span class=fn>inject</span>()</code> is a fire-once, blow-your-load, self-removing method that will inject CSS into the page and remove itself afterwards. If you wish to never inject CSS into the page, you can remove the method with <code><span class=fn>delete</span> checkswipe.<span class=p>inject</span></code>.</p>
 
