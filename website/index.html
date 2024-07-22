@@ -128,18 +128,17 @@
     <h2>Use it</h2>
     <p>To enable Checkswipe.js on page load:</p>
     <ol>
-        <li>add the attribute <code><span class=attr>data-checkswipe</span></code> to any group (preferably <code>&lt;<span class=kw>fieldset</span>&gt;</code>)</li>
+        <li>add the attribute <code><span class=attr>data-checkswipe</span></code> to any group</li>
         <li>after page has loaded, run <code><span class=fn>checkswipe</span>()</code></li>
     </ol>
 
     <h3>Manual usage</h3>
-    <p>If you wish to not use the default behavior of injecting CSS and swipe-ify the whole page you can do the process manually. For instance, if you do not have control of the HTML and want to swipe-ify elements dynamically.</p>
-    <p>To manually swipe-ify any group, you can use <code>checkswipe.<span class=fn>on</span>(group)</code> which will add the correct attribute and handle its checkboxes.</p>
+    <p>If you wish to not use the default behavior of injecting CSS and swipe-ify automatically, you can do the process manually. For instance, if you do not have control of the HTML and want to swipe-ify elements dynamically, or wish to not animate the checkboxes.</p>
+    <p>To manually swipe-ify any group, you can use <code>checkswipe.<span class=fn>on</span>(group)</code> which will add the correct attribute to the group and handle its checkboxes.</p>
     <p><code>checkswipe.<span class=fn>inject</span>()</code> is a fire-once, blow-your-load, self-removing method that will inject CSS into the page and remove itself afterwards. If you wish to never inject CSS into the page, you can remove the method with <code><span class=fn>delete</span> checkswipe.<span class=p>inject</span></code>.</p>
 
-
     <h3>Content Security Policy</h3>
-    <p>Checkswipe.js injects CSS by default, and the examples on this page uses the inline event handler <code><span class=fn>onload</span></code>. This might not go well on a page with a restrictive CSP.</p>
+    <p>Checkswipe.js injects CSS by default, and the examples on this page uses the inline event handler <code><span class=fn>onload</span></code>. This might not go well on pages with a restrictive CSP.</p>
     <details>
         <summary>CSP Workarounds</summary>
         <p>By default, a <code>&lt;<span class=kw>style</span> <span class=attr>id</span>=<span class=v>checkswipe-injected</span>&gt;</code> is injected into the document's <code>&lt;<span class=kw>head</span>&gt;</code> for animations. If your website has a restrictive <abbr title="content security policy">CSP</abbr>, you can use either:</p>
@@ -164,15 +163,15 @@
     <hr>
 
     <h2>How it works</h2>
-    <p><code><span class=fn>checkswipe</span>()</code> looks for every <code>&lt;<span class=kw><i>element</i></span>&gt;</code> with the attribute <code><span class=attr>data-checkswipe</span></code>, and attaches a listener to each checkbox inside.</p>
-    <p>Each <code>&lt;<span class=kw><i>element</i></span>&gt;</code> is independent, and only checkboxes within them can be swiped.</p>
+    <p><code><span class=fn>checkswipe</span>()</code> looks for every element with the attribute <code><span class=attr>data-checkswipe</span></code>, and attaches a listener to each checkbox inside.</p>
+    <p>Each group is independent, and only checkboxes within them can be swiped.</p>
     <p>Intentionally only activates when pressing and dragging over checkboxes – does not affect labels and their text.</p>
     <p>Checkboxes growing larger is pure and simple CSS, and is not required – but recommended.</p>
-    <p>Very self-contained. Only the group and its checkboxes within are affected. At worst, on a <code>mousedown</code> event, a temporary self-removing <code>mouseup</code> handler is applied to the page to detect when the user releases the mouse button.</p>
+    <p>Very self-contained. Only the group and its checkboxes within are affected. The worst offender is a temporary self-removing <code>mouseup</code> handler is applied to the page to detect when the user releases the mouse button.</p>
     <p>Note: Each <code>&lt;<span class=kw>input</span> <span class=attr>type</span>=<span class=v>checkbox</span>&gt;</code> gets event listeners – adding or replacing checkboxes requires to re-run code for those checkboxes.</p>
 
     <h2>Examples</h2>
-    <p>These are some use-cases of Checkswipe.js.</p>
+    <p>Here be dragons.</p>
 
     <h3>Multiple groups</h3>
     <p>Groups can be used on the same page, and they will not interfere with each other.</p>
