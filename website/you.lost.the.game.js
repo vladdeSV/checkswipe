@@ -27,50 +27,50 @@ function resetGame() {
         const checkboxes = form.querySelectorAll('input[type=checkbox]')
         const resetContainer = form.querySelector('div.reset')
 
-        let timerStarted = false;
-        let timer = 0;
+        let timerStarted = false
+        let timer = 0
 
-        timerDisplay.dataset.best = '';
-        timerDisplay.dataset.bestDisplay = '–';
-        timerDisplay.textContent = '–';
+        timerDisplay.dataset.best = ''
+        timerDisplay.dataset.bestDisplay = '–'
+        timerDisplay.textContent = '–'
 
         resetContainer.innerHTML = '<button type=reset>reset timer</button>'
         const reset = resetContainer.querySelector('button[type=reset]')
         reset.addEventListener('click', () => {
-            clearInterval(intervals[fieldset.dataset.checkswipe !== undefined ? 0 : 1]);
-            timerStarted = false;
-            timer = 0;
-            timerDisplay.textContent = '–';
-            checkboxes.forEach(checkbox => checkbox.checked = false);
-        });
+            clearInterval(intervals[fieldset.dataset.checkswipe !== undefined ? 0 : 1])
+            timerStarted = false
+            timer = 0
+            timerDisplay.textContent = '–'
+            checkboxes.forEach(checkbox => (checkbox.checked = false))
+        })
 
         checkboxes.forEach(checkbox => {
             checkbox.parentElement.addEventListener('mousedown', () => {
                 if (!timerStarted) {
-                    startTimer();
-                    timerStarted = true;
+                    startTimer()
+                    timerStarted = true
                 }
-            });
+            })
 
-            checkbox.addEventListener('change', checkCompletion);
-        });
+            checkbox.addEventListener('change', checkCompletion)
+        })
 
         function startTimer() {
             intervals[fieldset.dataset.checkswipe !== undefined ? 0 : 1] = setInterval(() => {
-                timer++;
+                timer++
                 let displayNumber = timer / 100
-                timerDisplay.textContent = displayNumber.toFixed(2) + 's';
-            }, 10);
+                timerDisplay.textContent = displayNumber.toFixed(2) + 's'
+            }, 10)
         }
 
         function checkCompletion() {
-            const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+            const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked)
             if (allChecked) {
-                clearInterval(intervals[fieldset.dataset.checkswipe !== undefined ? 0 : 1]);
-                let best = timerDisplay.dataset.best;
+                clearInterval(intervals[fieldset.dataset.checkswipe !== undefined ? 0 : 1])
+                let best = timerDisplay.dataset.best
                 if (best === undefined || best === '' || timer < best) {
-                    timerDisplay.dataset.best = String(timer);
-                    timerDisplay.dataset.bestDisplay = (timer / 100).toFixed(2) + 's';
+                    timerDisplay.dataset.best = String(timer)
+                    timerDisplay.dataset.bestDisplay = (timer / 100).toFixed(2) + 's'
                 }
             }
         }

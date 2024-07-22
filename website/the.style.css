@@ -1,117 +1,117 @@
 .touchscreen-only {
-  display: none;
-  background: #ffcc2244;
+    display: none;
+    background: #ffcc2244;
 
-  & > header {
-    background: inherit;
-  }
+    & > header {
+        background: inherit;
+    }
 }
 
 @media (hover: none) and (pointer: coarse) {
-  .touchscreen-only {
-    display: block;
-  }
+    .touchscreen-only {
+        display: block;
+    }
 }
 
 :root {
-  font-family: system-ui;
+    font-family: system-ui;
 }
 
 body > :is(main, header, footer) {
-  max-width: 60ch;
+    max-width: 60ch;
 }
 
 label {
-  display: block;
+    display: block;
 }
 
 .sbs {
-  display: inline-grid;
-  gap: 2em;
-  grid-template-columns: 1fr 1fr;
+    display: inline-grid;
+    gap: 2em;
+    grid-template-columns: 1fr 1fr;
 }
 
 .logo {
-  display: flex;
+    display: flex;
 }
 
 .logo > hgroup {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 code.version {
-  font-size: 0.3em;
-  vertical-align: middle;
+    font-size: 0.3em;
+    vertical-align: middle;
 }
 
 .playfield {
-  display: grid;
-  gap: 0.5em 2em;
-  max-width: 500px;
-  margin: 2em auto;
-  grid-template-rows: auto auto; /* Define two rows */
-  grid-template-columns: 1fr 1fr; /* Define two columns of equal width */
-  grid-template-areas:
-    "a a" /* first row, one element spanning two columns */
-    "b c"; /* second row, two elements */
+    display: grid;
+    gap: 0.5em 2em;
+    max-width: 500px;
+    margin: 2em auto;
+    grid-template-rows: auto auto; /* Define two rows */
+    grid-template-columns: 1fr 1fr; /* Define two columns of equal width */
+    grid-template-areas:
+        'a a' /* first row, one element spanning two columns */
+        'b c'; /* second row, two elements */
 }
 
 .playfield > label {
-  grid-area: a;
+    grid-area: a;
 }
 
 .playfield > div:first-of-type {
-  grid-area: b;
+    grid-area: b;
 }
 
 .playfield > div:last-of-type {
-  grid-area: c;
+    grid-area: c;
 }
 
-.game button[type=reset] {
-  padding-block: 0.4em;
-  margin-bottom: 0;
+.game button[type='reset'] {
+    padding-block: 0.4em;
+    margin-bottom: 0;
 }
 
 [data-timer] {
-  font-family: monospace;
+    font-family: monospace;
 }
 
 [data-timer]::before {
-  content: 'Timer: ';
+    content: 'Timer: ';
 }
 
 [data-timer][data-best-display]::after {
-  content: 'Best: ' attr(data-best-display);
-  display: block;
+    content: 'Best: ' attr(data-best-display);
+    display: block;
 }
 
 /* nesting css because it's non-essential (won't work with old browser) */
 code {
-  & .kw {
-    color: #f6547e;
-  }
+    & .kw {
+        color: #f6547e;
+    }
 
-  & .attr,
-  & .fn {
-    color: #c79400;
-  }
+    & .attr,
+    & .fn {
+        color: #c79400;
+    }
 
-  & .v {
-    color: #00a66e;
-  }
-  
-  & .p {
-    color: #59c1ff;
-  }
-  
-  & .n {
-    color: #d2a6ff
-  }
+    & .v {
+        color: #00a66e;
+    }
 
-  & .comment {
-    color: #767676;
-  }
+    & .p {
+        color: #59c1ff;
+    }
+
+    & .n {
+        color: #d2a6ff;
+    }
+
+    & .comment {
+        color: #767676;
+    }
 }
 
 .has {
@@ -119,151 +119,156 @@ code {
 }
 
 @supports selector(:has(*)) {
-  .has {
-    display: block;
-  }
+    .has {
+        display: block;
+    }
 }
 
 hgroup > :is(h1, p) {
-  margin: 0;
+    margin: 0;
 }
 
 .lib-cdn {
-  display: none;
+    display: none;
 }
 
 label:has(#use-cdn:checked) {
-  & ~ .lib-local {
-    display: none;
-  }
+    & ~ .lib-local {
+        display: none;
+    }
 
-  & ~ .lib-cdn {
-    display: block;
-  }
+    & ~ .lib-cdn {
+        display: block;
+    }
 }
 
 /* logo animation */
 #logo-demo {
-  position: relative;
-  display: grid;
-  gap: 0.4em;
-  padding-top: 0.55em;
-  padding-bottom: 0.28em;
-  box-sizing: border-box;
-  width: 0.65em;
-  margin-right: 0.65em;
-  --demo-dur: 4s;
+    position: relative;
+    display: grid;
+    gap: 0.4em;
+    padding-top: 0.55em;
+    padding-bottom: 0.28em;
+    box-sizing: border-box;
+    width: 0.65em;
+    margin-right: 0.65em;
+    --demo-dur: 4s;
 }
 
 #logo-demo > .cb {
-  position: relative;
-  aspect-ratio: 1 / 1;
-  height: 100%;
-  background: white;
-  border-radius: 25%;
-  overflow: hidden;
+    position: relative;
+    aspect-ratio: 1 / 1;
+    height: 100%;
+    background: white;
+    border-radius: 25%;
+    overflow: hidden;
 
-  animation: checkbox-scale var(--demo-dur) ease-in-out 0.5s infinite;
+    animation: checkbox-scale var(--demo-dur) ease-in-out 0.5s infinite;
 }
 
 #logo-demo > .cb::after {
-  content: '';
-  position: absolute;
-  border: 1px solid #767676;
-  border-radius: inherit;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+    content: '';
+    position: absolute;
+    border: 1px solid #767676;
+    border-radius: inherit;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
-  animation: checkbox-visibility calc(2 * var(--demo-dur)) ease-in-out var(--delay, 0s) infinite;
+    animation: checkbox-visibility calc(2 * var(--demo-dur)) ease-in-out var(--delay, 0s) infinite;
 }
 
 #logo-demo > .cr {
-  color: white;
-  position: absolute;
-  top: 17%;
-  left: 0.3em;
+    color: white;
+    position: absolute;
+    top: 17%;
+    left: 0.3em;
 
-  animation: cursor var(--demo-dur) ease-in-out 0s infinite;
+    animation: cursor var(--demo-dur) ease-in-out 0s infinite;
 }
 
 /* animation of a cursor going up and down */
 @keyframes cursor {
-  0% {
-    top: 17%;
-  }
+    0% {
+        top: 17%;
+    }
 
-  15% {
-    transform: translateY(0);
-  }
-  15.001% {
-    transform: translateY(2px);
-  }
+    15% {
+        transform: translateY(0);
+    }
+    15.001% {
+        transform: translateY(2px);
+    }
 
-  40% {
-    top: 17%;
-  }
+    40% {
+        top: 17%;
+    }
 
-  50% {
-    top: 110%;
-  }
+    50% {
+        top: 110%;
+    }
 
-  55% {
-    transform: translateY(2px);
-  }
-  55.001% {
-    transform: translateY(0);
-  }
+    55% {
+        transform: translateY(2px);
+    }
+    55.001% {
+        transform: translateY(0);
+    }
 
-  80% {
-    top: 110%;
-  }
+    80% {
+        top: 110%;
+    }
 
-  100% {
-    top: 17%;
-  }
+    100% {
+        top: 17%;
+    }
 }
 
 @keyframes checkbox-scale {
-  0%, 10% {
-    transform: scale(1);
-  }
-  14%, 50% {
-    transform: scale(1.3);
-  }
-  54%, 100% {
-    transform: scale(1);
-  }
+    0%,
+    10% {
+        transform: scale(1);
+    }
+    14%,
+    50% {
+        transform: scale(1.3);
+    }
+    54%,
+    100% {
+        transform: scale(1);
+    }
 }
 
 @keyframes checkbox-visibility {
-  0%, 49.999% {
-    background: dodgerblue;
-    border: none;
-  }
+    0%,
+    49.999% {
+        background: dodgerblue;
+        border: none;
+    }
 
-  50%, 100% {
-    background: none;
-    border: 1px solid #767676;
-  }
+    50%,
+    100% {
+        background: none;
+        border: 1px solid #767676;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #logo-demo :is(.cb, .cr, .cr::after) {
-    animation: none;
-  }
+    #logo-demo :is(.cb, .cr, .cr::after) {
+        animation: none;
+    }
 
-  #logo-demo > .cb {
-    border: none;
-  }
+    #logo-demo > .cb {
+        border: none;
+    }
 
-  #logo-demo > .cb::after {
-    border: none;
-    background: dodgerblue;
-  }
+    #logo-demo > .cb::after {
+        border: none;
+        background: dodgerblue;
+    }
 
-  #logo-demo > .cr {
-    display: none;
-  }
+    #logo-demo > .cr {
+        display: none;
+    }
 }
