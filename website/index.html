@@ -168,8 +168,8 @@
     <p>Each group is independent, and only checkboxes within them can be swiped.</p>
     <p>Intentionally only activates when pressing and dragging over checkboxes – does not affect labels and their text.</p>
     <p>Checkboxes growing larger is pure and simple CSS, and is not required – but recommended.</p>
-    <p>Very self-contained. Only the group and its checkboxes within are affected. The worst offender is a temporary self-removing <code>mouseup</code> handler is applied to the page to detect when the user releases the mouse button.</p>
-    <p>Note: Each <code>&lt;<span class=kw>input</span> <span class=attr>type</span>=<span class=v>checkbox</span>&gt;</code> gets event listeners – adding or replacing checkboxes requires to re-run code for those checkboxes.</p>
+    <p>Very self-contained. Only the group and its checkboxes within are affected. The worst offender is a temporary self-removing <code>mouseup</code> handler that is applied to the page on a <code>mousedown</code> event to detect when the user releases the mouse button.</p>
+    <p><strong>Note</strong>: Each <code>&lt;<span class=kw>input</span> <span class=attr>type</span>=<span class=v>checkbox</span>&gt;</code> gets individual event listeners – dynamically adding or replacing checkboxes requires to re-run code for those checkboxes.</p>
 
     <h2>Examples</h2>
     <p>Here be dragons.</p>
