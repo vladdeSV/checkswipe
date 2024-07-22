@@ -1,8 +1,5 @@
 .touchscreen-only {
   display: none;
-  margin-top: 3em;
-  border-radius: 0.5em;
-  padding: 1em;
   background: #ffcc2244;
 
   & > header {
