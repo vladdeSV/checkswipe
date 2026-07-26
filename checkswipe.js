@@ -138,6 +138,8 @@ checkswipe.inject = function (nonce) {
 [data-checkswipe]:not([data-checkswipe-specify]) input[type=checkbox],
 [data-checkswipe][data-checkswipe-specify] input[type=checkbox][data-checkswipe-use] {
     transition: transform var(--checkswipe-duration) var(--checkswipe-easing) var(--checkswipe-delay);
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 [data-checkswipe]:not([data-checkswipe='']):not([data-checkswipe-specify]) input[type=checkbox],
