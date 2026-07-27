@@ -168,7 +168,7 @@ label:has(#use-cdn:checked) {
     }
 
     & input[type=checkbox] {
-        rotate: calc(135deg * var(--descale));
+        rotate: calc(135deg * var(--descale) + var(--n) * 1.5deg);
     }
 
     & [data-checkswipe-group=a] {
