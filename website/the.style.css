@@ -1,24 +1,14 @@
-.touchscreen-only {
-    display: none;
-    background: #ffcc2244;
-
-    & > header {
-        background: inherit;
-    }
-}
-
-@media (hover: none) and (pointer: coarse) {
-    .touchscreen-only {
-        display: block;
-    }
-}
-
 :root {
     font-family: system-ui;
 }
 
-body > :is(main, header, footer) {
-    max-width: 60ch;
+body> :is(main, header, footer) {
+    max-width: 720px;
+}
+
+body>footer {
+    font-size: 0.8em;
+    color: #07101d;
 }
 
 label {
@@ -35,7 +25,7 @@ label {
     display: flex;
 }
 
-.logo > hgroup {
+.logo>hgroup {
     margin-bottom: 0;
 }
 
@@ -49,22 +39,26 @@ code.version {
     gap: 0.5em 2em;
     max-width: 500px;
     margin: 2em auto;
-    grid-template-rows: auto auto; /* Define two rows */
-    grid-template-columns: 1fr 1fr; /* Define two columns of equal width */
+    grid-template-rows: auto auto;
+    /* Define two rows */
+    grid-template-columns: 1fr 1fr;
+    /* Define two columns of equal width */
     grid-template-areas:
-        'a a' /* first row, one element spanning two columns */
-        'b c'; /* second row, two elements */
+        'a a'
+        /* first row, one element spanning two columns */
+        'b c';
+    /* second row, two elements */
 }
 
-.playfield > label {
+.playfield>label {
     grid-area: a;
 }
 
-.playfield > div:first-of-type {
+.playfield>div:first-of-type {
     grid-area: b;
 }
 
-.playfield > div:last-of-type {
+.playfield>div:last-of-type {
     grid-area: c;
 }
 
@@ -124,7 +118,7 @@ code {
     }
 }
 
-hgroup > :is(h1, p) {
+hgroup> :is(h1, p) {
     margin: 0;
 }
 
@@ -133,12 +127,63 @@ hgroup > :is(h1, p) {
 }
 
 label:has(#use-cdn:checked) {
-    & ~ .lib-local {
+    &~.lib-local {
         display: none;
     }
 
-    & ~ .lib-cdn {
+    &~.lib-cdn {
         display: block;
+    }
+}
+
+/* sprial */
+.spiral {
+    z-index: 1;
+    width: 100%;
+    height: 500px;
+    position: relative;
+}
+
+.spiral>div {
+    position: absolute;
+    left: 45%;
+    top: 50%;
+    text-align: right;
+    transform-origin: left;
+
+    --start-rotate: -30deg;
+    --start-offset: 60px;
+    --descale: pow(0.96, var(--n));
+
+    width: calc(var(--start-offset) + 20px * var(--n) * var(--descale));
+    rotate: calc(-1.358456rad / 3 * var(--n) * var(--descale) + var(--start-rotate));
+    z-index: calc(var(--n) * -1);
+
+    &:nth-child(n + 13) {
+        --start-rotate: -150deg;
+    }
+
+    &:nth-child(n + 25) {
+        --start-rotate: -270deg;
+    }
+
+    & input[type=checkbox] {
+        rotate: calc(135deg * var(--descale));
+    }
+
+    & [data-checkswipe-group=a] {
+        --pico-primary-border: #c70f0f;
+        --pico-primary-background: darkred;
+    }
+
+    & [data-checkswipe-group=b] {
+        --pico-primary-border: rgb(18, 158, 18);
+        --pico-primary-background: darkgreen;
+    }
+
+    & [data-checkswipe-group=c] {
+        --pico-primary-border: rgb(22, 121, 179);
+        --pico-primary-background: rgb(21, 84, 126);
     }
 }
 
@@ -155,7 +200,7 @@ label:has(#use-cdn:checked) {
     --demo-dur: 4s;
 }
 
-#logo-demo > .cb {
+#logo-demo>.cb {
     position: relative;
     aspect-ratio: 1 / 1;
     height: 100%;
@@ -166,7 +211,7 @@ label:has(#use-cdn:checked) {
     animation: checkbox-scale var(--demo-dur) ease-in-out 0.5s infinite;
 }
 
-#logo-demo > .cb::after {
+#logo-demo>.cb::after {
     content: '';
     position: absolute;
     border: 1px solid #767676;
@@ -179,7 +224,7 @@ label:has(#use-cdn:checked) {
     animation: checkbox-visibility calc(2 * var(--demo-dur)) ease-in-out var(--delay, 0s) infinite;
 }
 
-#logo-demo > .cr {
+#logo-demo>.cr {
     color: white;
     position: absolute;
     top: 17%;
@@ -197,6 +242,7 @@ label:has(#use-cdn:checked) {
     15% {
         transform: translateY(0);
     }
+
     15.001% {
         transform: translateY(2px);
     }
@@ -212,6 +258,7 @@ label:has(#use-cdn:checked) {
     55% {
         transform: translateY(2px);
     }
+
     55.001% {
         transform: translateY(0);
     }
@@ -226,14 +273,17 @@ label:has(#use-cdn:checked) {
 }
 
 @keyframes checkbox-scale {
+
     0%,
     10% {
         transform: scale(1);
     }
+
     14%,
     50% {
         transform: scale(1.3);
     }
+
     54%,
     100% {
         transform: scale(1);
@@ -241,6 +291,7 @@ label:has(#use-cdn:checked) {
 }
 
 @keyframes checkbox-visibility {
+
     0%,
     49.999% {
         background: dodgerblue;
@@ -259,16 +310,16 @@ label:has(#use-cdn:checked) {
         animation: none;
     }
 
-    #logo-demo > .cb {
+    #logo-demo>.cb {
         border: none;
     }
 
-    #logo-demo > .cb::after {
+    #logo-demo>.cb::after {
         border: none;
         background: dodgerblue;
     }
 
-    #logo-demo > .cr {
+    #logo-demo>.cr {
         display: none;
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang=en>
+<html lang=en-US>
 
 <head>
     <meta charset=utf-8>
@@ -18,220 +18,262 @@
     <!-- some code for "is it really faster?" section -->
     <script defer src=you.lost.the.game.js></script>
 
-    <!-- only things related to checkswipe -->
-    <script defer src=checkswipe.js onload=checkswipe()></script>
+    <!-- only thing related to checkswipe -->
+    <script defer src=checkswipe.js></script>
 </head>
 
 <body>
-<header class=logo>
-    <aside id=logo-demo aria-hidden=true>
-        <div class=cb style='--delay: 0.6s;'></div>
-        <div class=cb style='--delay: 1.75s;'></div>
-        <div class=cb style='--delay: 1.85s;'></div>
-        <svg class=cr width=12 height=18 viewBox='-1 -1 13 19' xmlns='http://www.w3.org/2000/svg'>
-            <path d='M0,0 L0,16 L4,13 L7,18 L9,16 L7,12 L12,12 Z' fill=white stroke=black stroke-width=1 />
-        </svg>
-    </aside>
-    <hgroup>
-        <h1>Checkswipe.js <code class=version>v3.0</code></h1>
-        <p><i>"Click-and-drag" over HTML checkboxes</i></p>
-    </hgroup>
-</header>
+    <header class=logo>
+        <aside id=logo-demo aria-hidden=true>
+            <div class=cb style='--delay: 0.6s;'></div>
+            <div class=cb style='--delay: 1.75s;'></div>
+            <div class=cb style='--delay: 1.85s;'></div>
+            <svg class=cr width=12 height=18 viewBox='-1 -1 13 19' xmlns='http://www.w3.org/2000/svg'>
+                <path d='M0,0 L0,16 L4,13 L7,18 L9,16 L7,12 L12,12 Z' fill=white stroke=black stroke-width=1 />
+            </svg>
+        </aside>
+        <hgroup>
+            <h1>Checkswipe.js <code class=version>v{{VERSION-MAJOR-MINOR}}</code></h1>
+            <p><i>"Click-and-drag" over HTML checkboxes</i></p>
+        </hgroup>
+    </header>
 
-<article class=touchscreen-only>
-    <header>⚠️ Touchscreen detected</header>
-    <main>Checkswipe.js is designed for devices with a mouse cursor, and unfortunately does not work on touchscreens. Sorry!</main>
-</article>
+    <main>
+        <noscript>
+            <hr/>
+            <h2>This library requires JavaScript!</h2>
+            <p>Unfortunately, that is the requirement when using at a JavaScript library.</p>
+            <p>Don't worry though, as all checkboxes still work exactly as normal.</p>
+            <hr/>
+        </noscript>
 
-<main>
-    <h2>Try it</h2>
-    <p>"Click-and-drag" over the checkboxes to fastly toggle them.</p>
+        <h2>Try it</h2>
+        <p>"Click-and-drag" over the checkboxes to quickly toggle them. Works on mobile.</p>
 
-    <form>
-        <fieldset data-checkswipe>
-            <label><input type=checkbox name=one> Option 1</label>
-            <label><input type=checkbox name=two> Option 2</label>
-            <label><input type=checkbox name=three> Option 3</label>
-            <label><input type=checkbox name=four> Option 4</label>
-            <label><input type=checkbox name=five> Option 5</label>
-        </fieldset>
-        <small>Tip: right-click and select "Inspect element" to see what the markup looks like!</small>
-    </form>
+        <form>
+            <fieldset data-checkswipe>
+                <label><input type=checkbox name=one> Option 1</label>
+                <label><input type=checkbox name=two> Option 2</label>
+                <label><input type=checkbox name=three> Option 3</label>
+                <label><input type=checkbox name=four> Option 4</label>
+                <label><input type=checkbox name=five> Option 5</label>
+            </fieldset>
+            <small>Tip: right-click and select "Inspect element" to see what the markup looks like.</small>
+        </form>
 
-    <h2>Get it</h2>
-    <p>Add the attribute <code><span class=attr>data-checkswipe</span></code> to any group.</p>
-    <pre><code>&lt;<span class=kw>fieldset</span> <mark><span class=attr>data-checkswipe</span></mark>&gt;<br>  &lt;<span class=kw>input</span> <span class=attr>type</span>=<span class=v>checkbox</span>&gt;<br>  &lt;<span class=kw>input</span> <span class=attr>type</span>=<span class=v>checkbox</span>&gt;<br>&lt;/<span class=kw>fieldset</span>&gt;</code></pre>
+        <h2>Get it</h2>
+        <p>Add the attribute <code><span class=attr>data-checkswipe</span></code> to any group.</p>
+        <pre><code>&lt;<span class=kw>fieldset</span> <mark><span class=attr>data-checkswipe</span></mark>&gt;<br>  &lt;<span class=kw>input</span> <span class=attr>type</span>=<span class=v>checkbox</span>&gt;<br>  &lt;<span class=kw>input</span> <span class=attr>type</span>=<span class=v>checkbox</span>&gt;<br>&lt;/<span class=kw>fieldset</span>&gt;</code></pre>
 
-    <p>Import the library with this line of code:</p>
-    <label class=has><input id=use-cdn type=checkbox role=switch> Use CDN</label>
-    <pre class=lib-local><code>&lt;<span class=kw>script</span> <span class=attr>src</span>=<span class=v>/js/checkswipe.js</span> <span class=attr>defer</span> <span class=attr>onload</span>=<span class=fn>checkswipe</span>()&gt;&lt;/<span class=kw>script</span>&gt;</code></pre>
-    <pre class=lib-cdn><code>&lt;<span class=kw>script</span><br>  <span class=attr>src</span>=<span class=v>https://cdn.jsdelivr.net/gh/vladdesv/checkswipe@3.0.0/checkswipe.js</span><br>  <span class=attr>integrity</span>=<span class=v>'sha-384 hskcDBj244HsZfOpUOdNw3gxzSLnAF9RaR4aro56xiYuzwhnwNbCrdwG0D+ZxD5a'</span><br>  <span class=attr>crossorigin</span>=<span class=v>anonymous</span><br>  <span class=attr>defer</span> <span class=attr>onload</span>=<span class=fn>checkswipe</span>()<br>&gt;&lt;/<span class=kw>script</span>&gt;</code></pre>
-    <p>See the <a href=https://github.com/vladdeSV/checkswipe/releases/latest>latest release</a> and the <a href=https://github.com/vladdeSV/checkswipe>source code</a> on GitHub.</p>
+        <p>Import the library with this line of code:</p>
+        <label class=has><input id=use-cdn type=checkbox role=switch> Use CDN</label>
+        <pre class=lib-local><code>&lt;<span class=kw>script</span> <span class=attr>src</span>=<span class=v>/js/checkswipe.js</span> <span class=attr>defer</span>&gt;&lt;/<span class=kw>script</span>&gt;</code></pre>
+        <pre class=lib-cdn><code>&lt;<span class=kw>script</span><br>  <span class=attr>src</span>=<span class=v>https://cdn.jsdelivr.net/gh/vladdesv/checkswipe@{{VERSION}}/checkswipe.js</span><br>  <span class=attr>integrity</span>=<span class=v>'sha384-{{SHA384}}'</span><br>  <span class=attr>crossorigin</span>=<span class=v>anonymous</span><br>  <span class=attr>defer</span><br>&gt;&lt;/<span class=kw>script</span>&gt;</code></pre>
+        <p>See the <a href=https://github.com/vladdeSV/checkswipe/releases/latest>latest release</a> (<a href=https://github.com/vladdeSV/checkswipe/releases/download/{{VERSION}}/checkswipe.css>direct link</a>)and the <a href=https://github.com/vladdeSV/checkswipe>source code</a> on GitHub.</p>
 
-    <h2>Test it</h2>
-    <blockquote>
-        Is it really faster?
-        <footer>
-            <cite>— You</cite>
-        </footer>
-    </blockquote>
+        <div class=spiral data-checkswipe aria-hidden=true>
+            <div style='--n: 0'><input data-checkswipe-group=a tabindex='-1' type=checkbox></div>
+            <div style='--n: 1'><input data-checkswipe-group=a tabindex='-1' type=checkbox></div>
+            <div style='--n: 2'><input data-checkswipe-group=a tabindex='-1' type=checkbox></div>
+            <div style='--n: 3'><input data-checkswipe-group=a tabindex='-1' type=checkbox></div>
+            <div style='--n: 4'><input data-checkswipe-group=a tabindex='-1' type=checkbox></div>
+            <div style='--n: 5'><input data-checkswipe-group=a tabindex='-1' type=checkbox></div>
+            <div style='--n: 6'><input data-checkswipe-group=a tabindex='-1' type=checkbox></div>
+            <div style='--n: 7'><input data-checkswipe-group=a tabindex='-1' type=checkbox></div>
+            <div style='--n: 8'><input data-checkswipe-group=a tabindex='-1' type=checkbox></div>
+            <div style='--n: 9'><input data-checkswipe-group=a tabindex='-1' type=checkbox></div>
+            <div style='--n: 10'><input data-checkswipe-group=a tabindex='-1' type=checkbox></div>
+            <div style='--n: 11'><input data-checkswipe-group=a tabindex='-1' type=checkbox></div>
 
-    <p>Try it out for yourself – see how fast you can toggle all checkboxes.</p>
-    <p>Timer starts on the <code>mousedown</code> event; stops when all checkboxes are checked.</p>
+            <div style='--n: 0'><input data-checkswipe-group=b tabindex='-1' type=checkbox></div>
+            <div style='--n: 1'><input data-checkswipe-group=b tabindex='-1' type=checkbox></div>
+            <div style='--n: 2'><input data-checkswipe-group=b tabindex='-1' type=checkbox></div>
+            <div style='--n: 3'><input data-checkswipe-group=b tabindex='-1' type=checkbox></div>
+            <div style='--n: 4'><input data-checkswipe-group=b tabindex='-1' type=checkbox></div>
+            <div style='--n: 5'><input data-checkswipe-group=b tabindex='-1' type=checkbox></div>
+            <div style='--n: 6'><input data-checkswipe-group=b tabindex='-1' type=checkbox></div>
+            <div style='--n: 7'><input data-checkswipe-group=b tabindex='-1' type=checkbox></div>
+            <div style='--n: 8'><input data-checkswipe-group=b tabindex='-1' type=checkbox></div>
+            <div style='--n: 9'><input data-checkswipe-group=b tabindex='-1' type=checkbox></div>
+            <div style='--n: 10'><input data-checkswipe-group=b tabindex='-1' type=checkbox></div>
+            <div style='--n: 11'><input data-checkswipe-group=b tabindex='-1' type=checkbox></div>
 
-    <section class=playfield>
-        <label>
-            Difficulty
-            <input type=range min=2 max=20 value=5 id=difficulty>
-        </label>
-
-        <div>
-            <p>
-                <strong>with Checkswipe.js</strong><br>
-                <small>"click-and-drag"</small>
-            </p>
-            <form class=game>
-                <fieldset data-checkswipe>
-                    <label><input type=checkbox name=1> Option 1</label>
-                    <label><input type=checkbox name=2> Option 2</label>
-                    <label><input type=checkbox name=3> Option 3</label>
-                    <label><input type=checkbox name=4> Option 4</label>
-                    <label><input type=checkbox name=5> Option 5</label>
-                </fieldset>
-                <p><span data-timer data-best-display=–>–</span></p>
-                <div class=reset>
-                    <button type=reset>reset timer</button>
-                </div>
-            </form>
+            <div style='--n: 0'><input data-checkswipe-group=c tabindex='-1' type=checkbox checked></div>
+            <div style='--n: 1'><input data-checkswipe-group=c tabindex='-1' type=checkbox checked></div>
+            <div style='--n: 2'><input data-checkswipe-group=c tabindex='-1' type=checkbox checked></div>
+            <div style='--n: 3'><input data-checkswipe-group=c tabindex='-1' type=checkbox checked></div>
+            <div style='--n: 4'><input data-checkswipe-group=c tabindex='-1' type=checkbox checked></div>
+            <div style='--n: 5'><input data-checkswipe-group=c tabindex='-1' type=checkbox checked></div>
+            <div style='--n: 6'><input data-checkswipe-group=c tabindex='-1' type=checkbox checked></div>
+            <div style='--n: 7'><input data-checkswipe-group=c tabindex='-1' type=checkbox checked></div>
+            <div style='--n: 8'><input data-checkswipe-group=c tabindex='-1' type=checkbox checked></div>
+            <div style='--n: 9'><input data-checkswipe-group=c tabindex='-1' type=checkbox checked></div>
+            <div style='--n: 10'><input data-checkswipe-group=c tabindex='-1' type=checkbox checked></div>
+            <div style='--n: 11'><input data-checkswipe-group=c tabindex='-1' type=checkbox checked></div>
         </div>
 
-        <div>
-            <p>
-                <strong>vanilla</strong><br>
-                <small>click each box</small>
-            </p>
-            <form class=game>
-                <fieldset>
-                    <label><input type=checkbox name=1> Option 1</label>
-                    <label><input type=checkbox name=2> Option 2</label>
-                    <label><input type=checkbox name=3> Option 3</label>
-                    <label><input type=checkbox name=4> Option 4</label>
-                    <label><input type=checkbox name=5> Option 5</label>
-                </fieldset>
-                <p><span data-timer data-best-display=–>–</span></p>
-                <div class=reset>
-                    <button type=reset>reset timer</button>
-                </div>
-            </form>
-        </div>
-    </section>
+        <h2>Test it</h2>
+        <blockquote>
+            Is it really faster?
+            <footer><cite>— You</cite></footer>
+        </blockquote>
 
-    <h2>Use it</h2>
-    <p>To enable Checkswipe.js on page load:</p>
-    <ol>
-        <li>add the attribute <code><span class=attr>data-checkswipe</span></code> to any group</li>
-        <li>after page has loaded, run <code><span class=fn>checkswipe</span>()</code></li>
-    </ol>
+        <p>Try it out for yourself and see how fast you can toggle all checkboxes.</p>
+        <p>Timer starts on the <code>pointerdown</code> event and stops when all checkboxes are checked.</p>
 
-    <h3>Manual usage</h3>
-    <p>If you wish to not use the default behavior of injecting CSS and swipe-ify automatically, you can do the process manually. For instance, if you do not have control of the HTML and want to swipe-ify elements dynamically, or wish to not animate the checkboxes.</p>
-    <p>To manually swipe-ify any group, you can use <code>checkswipe.<span class=fn>on</span>(group)</code> which will add the correct attribute to the group and handle its checkboxes.</p>
-    <p><code>checkswipe.<span class=fn>inject</span>()</code> is a fire-once, blow-your-load, self-removing method that will inject CSS into the page and remove itself afterwards. If you wish to never inject CSS into the page, you can remove the method with <code><span class=fn>delete</span> checkswipe.<span class=p>inject</span></code>.</p>
+        <section class=playfield>
+            <label>
+                Difficulty
+                <input type=range min=2 max=20 value=5 id=difficulty>
+            </label>
 
-    <h3>Content Security Policy</h3>
-    <p>Checkswipe.js injects CSS by default, and the examples on this page uses the inline event handler <code><span class=fn>onload</span></code>. This might not go well on pages with a restrictive CSP.</p>
-    <details>
-        <summary>CSP Workarounds</summary>
-        <p>By default, a <code>&lt;<span class=kw>style</span> <span class=attr>id</span>=<span class=v>checkswipe-injected</span>&gt;</code> is injected into the document's <code>&lt;<span class=kw>head</span>&gt;</code> for animations. If your website has a restrictive <abbr title="content security policy">CSP</abbr>, you can use either:</p>
-        <ol style='list-style: lower-alpha'>
-            <li>
-                separate the execution of the script, and inject the styles manually with a provided nonce.
-                <pre><code>&lt;<span class=kw>script</span> <span class=attr>src</span>=<span class=v>/js/checkswipe.js</span>&gt;&lt;/<span class=kw>script</span>&gt;<br>&lt;<span class=kw>script</span> <span class=attr>nonce</span>=<span class=v>'{{ nonce }}'</span>&gt;<br>    <span>document</span>.<span class=fn>addEventListener</span>(<span class=v>'DOMContentLoaded'</span>, () => {<br>        <span>checkswipe</span>.<span class=fn>inject</span>(<span class=v>'{{ nonce }}'</span>);<br>        <span>checkswipe</span>()<br>    });<br>&lt;/<span class=kw>script</span>&gt;</code></pre>
-                <i>in this case, the js is located at an allowed location, but the inline script required a nonce. this is the appoach i used for work.</i>
-            </li>
-            <li>
-                copy-and-paste the CSS into your own allowed stylesheet, and disable the injection method in your allowed script file.
-                <pre><code>document.<span class=fn>addEventListener</span>(<span class=v>'DOMContentLoaded'</span>, () => {<br>    <span class=fn>delete</span> <span>checkswipe</span>.<span class=p>inject</span><br>    <span>checkswipe</span>()<br>});</code></pre>
-            </li>
-            <li>some variation of the two above examples.</li>
+            <div>
+                <p>
+                    <strong>with Checkswipe.js</strong><br>
+                    <small>"click-and-drag"</small>
+                </p>
+                <form class=game>
+                    <fieldset data-checkswipe>
+                        <label><input type=checkbox name=1> Option 1</label>
+                        <label><input type=checkbox name=2> Option 2</label>
+                        <label><input type=checkbox name=3> Option 3</label>
+                        <label><input type=checkbox name=4> Option 4</label>
+                        <label><input type=checkbox name=5> Option 5</label>
+                    </fieldset>
+                    <p><span data-timer data-best-display=–>–</span></p>
+                    <div class=reset>
+                        <button type=reset>reset timer</button>
+                    </div>
+                </form>
+            </div>
+
+            <div>
+                <p>
+                    <strong>vanilla</strong><br>
+                    <small>click each box</small>
+                </p>
+                <form class=game>
+                    <fieldset>
+                        <label><input type=checkbox name=1> Option 1</label>
+                        <label><input type=checkbox name=2> Option 2</label>
+                        <label><input type=checkbox name=3> Option 3</label>
+                        <label><input type=checkbox name=4> Option 4</label>
+                        <label><input type=checkbox name=5> Option 5</label>
+                    </fieldset>
+                    <p><span data-timer data-best-display=–>–</span></p>
+                    <div class=reset>
+                        <button type=reset>reset timer</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        
+        <p>Emprically tested, I can swiple all checkboxes ~7× times faster than pressing them individually.</p>
+
+        <h2>Use it</h2>
+        <p>To enable Checkswipe.js:</p>
+        <ol>
+            <li>include the script</li>
+            <li>add the attribute <code><span class=attr>data-checkswipe</span></code> to any group</li>
         </ol>
-    </details>
 
-    <h2>Love it?</h2>
-    <p>If this little project made you smile, send me a virtual coffee – it boosts my ego.</p>
-    <p><a href=https://www.buymeacoffee.com/vladde><img src=buymeacoffee.png alt='Buy Me A Coffee' width=217 height=60></a></p>
+        <h3>CSS animations</h3>
+        <p>You can tweak CSS animation by overriding these properties:</p>
+        <ul>
+            <li><code>--checkswipe-scale</code><small>, default: <code>1.3</code></small></li>
+            <li><code>--checkswipe-duration</code><small>, default: <code>0.1s</code></small></li>
+            <li><code>--checkswipe-easing</code><small>, default: <code>cubic-bezier(...)</code></small></li>
+            <li><code>--checkswipe-delay</code><small>, default: <code>0.1s</code></small></li>
+        </ul>
+        <p>You can effectively "disable" the animation by setting the variable <code>--checkswipe-scale</code> to <code>intial</code>.</p>
+        <p>Try it here: 
+        <span data-checkswipe style='--checkswipe-scale: inital; white-space: nowrap;'>
+            <input type=checkbox>
+            <input type=checkbox>
+            <input type=checkbox>
+            <input type=checkbox>
+            <input type=checkbox>
+        </span>
+        </p>
 
-    <hr>
+        <h4>Disable CSS completely</h3>
+        <p>To disable CSS completely, add <code><span class=attr>data-no-css</span></code> to the script tag.</p>
+        <pre><code>&lt;<span class=kw>script</span> <mark><span class=attr>data-no-css</span></mark> <span class=attr>src</span>=<span class=v>/js/checkswipe.js</span> <span class=attr>defer</span>&gt;&lt;/<span class=kw>script</span>&gt;</code></pre>
 
-    <h2>How it works</h2>
-    <p><code><span class=fn>checkswipe</span>()</code> looks for every element with the attribute <code><span class=attr>data-checkswipe</span></code>, and attaches a listener to each checkbox inside.</p>
-    <p>Each group is independent, and only checkboxes within them can be swiped.</p>
-    <p>Intentionally only activates when pressing and dragging over checkboxes – does not affect labels and their text.</p>
-    <p>Checkboxes growing larger is pure and simple CSS, and is not required – but recommended.</p>
-    <p>Very self-contained. Only the group and its checkboxes within are affected. The worst offender is a temporary self-removing <code>mouseup</code> handler that is applied to the page on a <code>mousedown</code> event to detect when the user releases the mouse button.</p>
-    <p><strong>Note</strong>: Each <code>&lt;<span class=kw>input</span> <span class=attr>type</span>=<span class=v>checkbox</span>&gt;</code> gets individual event listeners – dynamically adding or replacing checkboxes requires to re-run code for those checkboxes.</p>
+        <h3>Content Security Policy</h3>
+        <p>Works with these <abbr title="content security policy">CSP</abbr> rules: <code>script-src 'self'; style-src 'self'</code>.</p>
 
-    <h2>Examples</h2>
-    <p>Here be dragons.</p>
+        <h2>Love it?</h2>
+        <p>If this project made you smile, send me a pricey coffee :^)</p>
+        <p><a href=https://www.buymeacoffee.com/vladde><img src=buymeacoffee.png alt='Buy Me A Coffee' width=217 height=60></a></p>
 
-    <h3>Multiple groups</h3>
-    <p>Groups can be used on the same page, and they will not interfere with each other.</p>
-    <div class=sbs>
-      <fieldset data-checkswipe>
-        <legend>Group 1</legend>
-        <label><input type=checkbox> Option 1</label>
-        <label><input type=checkbox> Option 2</label>
-        <label><input type=checkbox> Option 3</label>
-      </fieldset>
-      <fieldset data-checkswipe>
-        <legend>Group 2</legend>
-        <label><input type=checkbox> Option 1</label>
-        <label><input type=checkbox> Option 2</label>
-        <label><input type=checkbox> Option 3</label>
-      </fieldset>
-    </div>
+        <hr>
 
-    <h3>Only target specific checkboxes</h3>
-    <p>Tables are a bit cumbersome since they do not follow a conventional "grouped" structure, but it's possible to only make checkboxes in certain columns swipeable.</p>
-    <p>Include the attribute <code><span class=attr>data-checkswipe-specify</span></code> on the table, and add the attribute <code><span class=attr>data-checkswipe-use</span></code> on the checkboxes you want to be swipeable, and the other checkboxes will remain untouched.</p>
+        <h2>Examples</h2>
+        <p>Here be dragons.</p>
 
-    <table data-checkswipe data-checkswipe-specify>
-      <thead>
-        <tr>
-          <th>Swipeable</th>
-          <th>Text</th>
-          <th>Non-swipe 1</th>
-          <th>Non-swipe 2</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><input type=checkbox data-checkswipe-use></td>
-          <td>Foofoo</td>
-          <td><input type=checkbox></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td><input type=checkbox data-checkswipe-use></td>
-          <td>Barbar</td>
-          <td><input type=checkbox></td>
-          <td><input type=checkbox></td>
-        </tr>
-        <tr>
-          <td><input type=checkbox data-checkswipe-use></td>
-          <td>Bazbaz</td>
-          <td></td>
-          <td><input type=checkbox></td>
-        </tr>
-      </tbody>
-    </table>
+        <h3>Multiple groups</h3>
+        <p>Only checkboxes in their current group will be swipeable. You can have multiple groups, and they will not interfere with each other.</p>
+        <p>The two groups below each have their own <code><span class=attr>data-checkswipe</span></code> attribute. Swiping in one group does not grow the checkboxes in the other.</p>
+        <div class=sbs>
+            <fieldset data-checkswipe>
+                <legend>Group 1</legend>
+                <label><input type=checkbox> Option 1</label>
+                <label><input type=checkbox> Option 2</label>
+                <label><input type=checkbox> Option 3</label>
+            </fieldset>
+            <fieldset data-checkswipe>
+                <legend>Group 2</legend>
+                <label><input type=checkbox> Option 1</label>
+                <label><input type=checkbox> Option 2</label>
+                <label><input type=checkbox> Option 3</label>
+            </fieldset>
+        </div>
 
-    <p>If you want to group different columns of checkboxes together, you unfortunately are out of luck.</p>
+        <h3>Group checkboxes in same container</h3>
+        <p>Tables are a bit cumbersome since they do not follow a conventional "grouped" structure, but checkboxes can be split into independent swipeable groups within the same container.</p>
+        <p>Add the attribute <code><span class=attr>data-checkswipe-group</span>=<span class=v><i>name</i></span></code> to checkboxes, and a swipe only affects checkboxes with the same group name.</p>
+        <p>Every checkbox has an inherent empty string name <code><span class=v>''</span></code> by default.</p>
+        <table data-checkswipe>
+            <thead>
+                <tr>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type=checkbox data-checkswipe-group=foo></td>
+                    <td><input type=checkbox data-checkswipe-group=bar></td>
+                    <td><input type=checkbox data-checkswipe-group=baz></td>
+                    <td><input type=checkbox data-checkswipe-group=boz></td>
+                </tr>
+                <tr>
+                    <td><input type=checkbox data-checkswipe-group=foo></td>
+                    <td><input type=checkbox data-checkswipe-group=bar></td>
+                    <td><input type=checkbox data-checkswipe-group=baz></td>
+                    <td><input type=checkbox data-checkswipe-group=boz></td>
+                </tr>
+                <tr>
+                    <td><input type=checkbox data-checkswipe-group=foo></td>
+                    <td><input type=checkbox data-checkswipe-group=bar></td>
+                    <td><input type=checkbox data-checkswipe-group=baz></td>
+                    <td><input type=checkbox data-checkswipe-group=boz></td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>Ignoring checkboxes</h3>
+        <p>To completely exclude checkboxes from being swipeable, add the attribute <code><span class=attr>data-checkswipe-ignore</span></code> to the checkbox.</p>
 
-    <hr>
+    </main>
 
-    <p>I love you ❤️</p>
-</main>
+    <footer>
+        <hr/>
+
+        <p>Created by <a href=https://github.com/vladdeSV>@vladdeSV</a></p>
+    </footer>
 </body>
 
 </html>

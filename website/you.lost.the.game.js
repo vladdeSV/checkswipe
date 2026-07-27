@@ -45,7 +45,7 @@ function resetGame() {
         })
 
         checkboxes.forEach(checkbox => {
-            checkbox.parentElement.addEventListener('mousedown', () => {
+            checkbox.parentElement.addEventListener('pointerdown', () => {
                 if (!timerStarted) {
                     startTimer()
                     timerStarted = true
@@ -73,10 +73,6 @@ function resetGame() {
                     timerDisplay.dataset.bestDisplay = (timer / 100).toFixed(2) + 's'
                 }
             }
-        }
-
-        if (fieldset.hasAttribute('data-checkswipe')) {
-            checkswipe(fieldset)
         }
     })
 }
