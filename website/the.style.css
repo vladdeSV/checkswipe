@@ -146,7 +146,7 @@ label:has(#use-cdn:checked) {
 
 .spiral>div {
     position: absolute;
-    left: 45%;
+    left: 50%;
     top: 50%;
     text-align: right;
     transform-origin: left;
