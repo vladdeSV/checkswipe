@@ -5,6 +5,7 @@
     <meta charset=utf-8>
     <meta name=viewport content='width=device-width, initial-scale=1'>
     <meta name=color-scheme content='dark light' />
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self';">
     <link rel=icon type=image/svg+xml href=favicon.svg>
     <link rel=icon type=image/png sizes=192x192 href=favicon.png>
     <title>Checkswipe.js</title>
@@ -201,7 +202,7 @@
         <pre><code>&lt;<span class=kw>script</span> <mark><span class=attr>data-no-css</span></mark> <span class=attr>src</span>=<span class=v>/js/checkswipe.js</span> <span class=attr>defer</span>&gt;&lt;/<span class=kw>script</span>&gt;</code></pre>
 
         <h3>Content Security Policy</h3>
-        <p>Works with these <abbr title="content security policy">CSP</abbr> rules: <code>script-src 'self'; style-src 'self'</code>.</p>
+        <p>Checkswipe.js does not create any style elements nor add any inline style attributes, and thus operates under very strict <abbr title="content security policy">CSP</abbr> directives. <code>script-src 'self'</code> is the only directive needed to use this script. (No <code>'unsafe-*'</code> are needed.)</p>
 
         <h2>Love it?</h2>
         <p>If this project made you smile, send me a pricey coffee :^)</p>
